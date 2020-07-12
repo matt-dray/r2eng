@@ -30,7 +30,7 @@ This project is a work in progress and highly opinionated.
 You can install the development version of {r2eng} from GitHub with:
 
 ```{r install, eval=FALSE}
-remotes::install_github("r2eng")
+remotes::install_github("matt-dray/r2eng")
 ```
 
 There are no dependencies.
@@ -55,7 +55,7 @@ r2eng::r2eng_dictionary
 
 I'm always seeking to expand this.
 
-## WIP
+## Work in progress (WIP)
 
 There is much to do. Most R expressions won't currently work with the `r2eng()` function.
 
