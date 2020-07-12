@@ -15,11 +15,11 @@ McNamara](https://twitter.com/AmeliaMN)’s useR\! 2020 talk
 ([YouTube](https://www.youtube.com/watch?v=ckW9sSdIVAc),
 [slides](https://www.amelia.mn/SpeakingR/#1)).
 
-The project is a work in progress.
+This project is a work in progress.
 
 ## Installation
 
-You can install the released version of r2eng from GitHub with:
+You can install the development version of {r2eng} from GitHub with:
 
 ``` r
 remotes::install_github("r2eng")
@@ -59,10 +59,11 @@ There is much to do. Most R expressions won’t currently work with the
 
   - \[ \] Expand dictionary
   - \[ \] Split out parentheses
-  - \[ \] Smart check of expression structure, so ‘=’ will be used as
-    gets if used for assignment, but will be ‘is’ elsewhere
+  - \[ \] Smart check of expression structure (e.g. ‘=’ will be used as
+    gets if used for assignment, but will be ‘is’ elsewhere)
   - \[ \] Allow for variant opinions on translations
-  - \[ \] Vignette
+  - \[ \] Account for dollar, formula, tidyverse, etc, notation
+  - \[ \] Add vignettes
 
 ## Code of Conduct
 
