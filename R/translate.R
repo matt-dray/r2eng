@@ -5,10 +5,12 @@
 #'
 #' @param expression An R expression as a character string.
 #' @param speak Do you want your system to try and say the English expression?
+#'     Requires speakers on your machine.
 #'
-#' @return A list with three elements: the R expression, the 'translated'
-#'     English expression, and a data frame showing the translation of each
+#' @return A list with three elements: the input R expression, the 'translated'
+#'     English expression and a data frame showing the translation of each
 #'     R element.
+#'
 #' @export
 #'
 #' @examples
@@ -17,16 +19,15 @@
 #' }
 r2eng <- function(expression, speak = TRUE) {
 
-  # Translation guide
-  dictionary <- tibble::tribble(
-    ~"r", ~"eng",
-    "<-", "gets",
-    "->", "into",
-    "=", "is",
-    "%>%", "then",
-    "%in%", "matches",
-    "|", "or"
-  )
+  # Basic input check for expression argument
+  if (!is.character(expression)) {
+    stop("The 'expression' argument must be a character string.\n")
+  }
+
+  # Basic input check for speak argument
+  if (!is.logical(speak)) {
+    stop("The 'speak' argument must be TRUE or FALSE.\n")
+  }
 
   # Extract elements of the expression string
   r_vec <- strsplit(expression, " ")[[1]]
@@ -37,6 +38,9 @@ r2eng <- function(expression, speak = TRUE) {
     r = r_vec,
     stringsAsFactors = FALSE
   )
+
+  # Read the dictionary data from within the package
+  dictionary <- r2eng::r2eng_dictionary
 
   # Join the dictionary
   translation <- merge(

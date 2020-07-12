@@ -6,7 +6,7 @@
 \alias{r2eng-package}
 \title{r2eng: Translate R Code To An English Sentence}
 \description{
-Takes an R expression and converts it to English by matching
+Take an R expression and convert it to English by matching
     recognised symbols with an opinionated list of English 'translations'.
     Inspired By Amelia McNamara's useR! 2020 conference talk.
 }

@@ -9,11 +9,12 @@ r2eng(expression, speak = TRUE)
 \arguments{
 \item{expression}{An R expression as a character string.}
 
-\item{speak}{Do you want your system to try and say the English expression?}
+\item{speak}{Do you want your system to try and say the English expression?
+Requires speakers on your machine.}
 }
 \value{
-A list with three elements: the R expression, the 'translated'
-    English expression, and a data frame showing the translation of each
+A list with three elements: the input R expression, the 'translated'
+    English expression and a data frame showing the translation of each
     R element.
 }
 \description{

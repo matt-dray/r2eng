@@ -5,17 +5,20 @@
 
 <!-- badges: start -->
 
+[![Project Status: WIP – Initial development is in progress, but there
+has not yet been a stable, usable release suitable for the
+public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 <!-- badges: end -->
 
-The goal of the {r2eng} package is to take an R expression and
-‘translate’ it to an English sentence.
+The goal of the {r2eng} (as in ‘R to English’) package is to take an R
+expression and ‘translate’ it to an English sentence. Make R speakable\!
 
 The project inspired by [Amelia
 McNamara](https://twitter.com/AmeliaMN)’s useR\! 2020 talk
 ([YouTube](https://www.youtube.com/watch?v=ckW9sSdIVAc),
 [slides](https://www.amelia.mn/SpeakingR/#1)).
 
-This project is a work in progress.
+This project is a work in progress and highly opinionated.
 
 ## Installation
 
@@ -29,8 +32,7 @@ There are no dependencies.
 
 ## Example
 
-There’s currently one function in the package: `r2eng()` (as in ‘R to
-English’).
+There’s currently one function in the package: `r2eng()`.
 
 Pass it an R expression like this:
 
@@ -52,17 +54,44 @@ r2eng::r2eng("variable <- 1", speak = FALSE)
 Set speak to `TRUE` for a system call that will read the English
 sentence out loud.
 
+The dictionary is available with `r2eng_dictionary`:
+
+``` r
+r2eng::r2eng_dictionary
+#       r                  eng
+# 1    <-                 gets
+# 2    ->                 into
+# 3     =                   is
+# 4   %>%                 then
+# 5  %in%              matches
+# 6     |                   or
+# 7     !                  not
+# 8     ?      search help for
+# 9     ~                   by
+# 10    (     open parenthesis
+# 11    )    close parenthesis
+# 12    [  open square bracket
+# 13    ] close square bracket
+# 14    {     open curly brace
+# 15    }    close curly brace
+```
+
+I’m always seeking to expand this.
+
 ## WIP
 
 There is much to do. Most R expressions won’t currently work with the
 `r2eng()` function.
 
   - \[ \] Expand dictionary
-  - \[ \] Split out parentheses
+  - \[ \] Split out parentheses for evaluation
+  - \[ \] Ensure multi-line translation
   - \[ \] Smart check of expression structure (e.g. ‘=’ will be used as
     gets if used for assignment, but will be ‘is’ elsewhere)
   - \[ \] Allow for variant opinions on translations
-  - \[ \] Account for dollar, formula, tidyverse, etc, notation
+  - \[ \] Account for dialects (dollar, formula, tidyverse, etc,
+    notation)
+  - \[ \] Test\!
   - \[ \] Add vignettes
 
 ## Code of Conduct

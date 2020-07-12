@@ -1,8 +1,8 @@
 Package: r2eng
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Type: Package
 Title: Translate R Code To An English Sentence
-Description: Takes an R expression and converts it to English by matching
+Description: Take an R expression and convert it to English by matching
     recognised symbols with an opinionated list of English 'translations'.
     Inspired By Amelia McNamara's useR! 2020 conference talk.
 Authors@R: person(
@@ -16,3 +16,8 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
 Language: en-GB
+Depends: 
+    R (>= 2.10)
+Suggests:
+    tibble (>= 3.0.2),
+    usethis (>= 1.6.1)
