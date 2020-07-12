@@ -54,7 +54,8 @@ r2eng::r2eng("variable <- 1", speak = FALSE)
 Set speak to `TRUE` for a system call that will read the English
 sentence out loud.
 
-The dictionary is available with `r2eng_dictionary`:
+There’s an in-built dictionary, `r2eng_dictionary`, that maps R symbols
+to English terms:
 
 ``` r
 r2eng::r2eng_dictionary
@@ -76,14 +77,16 @@ r2eng::r2eng_dictionary
 # 15    }    close curly brace
 ```
 
-I’m always seeking to expand this.
+I’m always seeking to expand this dictionary and improve the
+`r2eng_dictionary` object. You can add ideas to [this GitHub
+issue](https://github.com/matt-dray/r2eng/issues/1).
 
 ## Work in progress (WIP)
 
 There is much to do. Most R expressions won’t currently work with the
 `r2eng()` function.
 
-  - \[ \] Expand dictionary
+  - \[ \] Expand the dictionary
   - \[ \] Split out parentheses for evaluation
   - \[ \] Ensure multi-line translation
   - \[ \] Smart check of expression structure (e.g. ‘=’ will be used as
