@@ -21,5 +21,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Matt Dray \email{mwdray@gmail.com}
 
+Authors:
+\itemize{
+  \item Chung-hong Chan \email{chainsawtiney@gmail.com} (\href{https://orcid.org/0000-0002-6232-7530}{ORCID})
+}
+
 }
 \keyword{internal}
