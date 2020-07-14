@@ -40,7 +40,7 @@ r2eng <- function(expression, speak = TRUE, function_call_end = "of ") {
   class(results) <- append(class(results), "r2eng")
   if (speak) {
       speak(results)
-  }  
+  }
   return(results)
 }
 
@@ -55,7 +55,7 @@ speak <- function(r2eng, ...) {
 }
 
 
-#' @rdname speak 
+#' @rdname speak
 #' @export
 speak.r2eng <- function(r2eng, ...) {
     system(paste0("say '", paste0(tail(r2eng$translation_map$eng, -1), collapse = ","), "'"))
@@ -82,66 +82,78 @@ print.r2eng <- function(r2eng, ...) {
 
 
 .translate <- function(token, text, function_call = "", function_call_end = "") {
-    if (token == "LEFT_ASSIGN" | token == "EQ_ASSIGN") {
-        return("gets")
+  if (token == "LEFT_ASSIGN" | token == "EQ_ASSIGN") {
+    return("gets")
+  }
+  if (token == "RIGHT_ASSIGN") {
+    return("into")
+  }
+  if (token == "NE") {
+    return("not equal")
+  }
+  if (token == "EQ") {
+    return("double equal")
+  }
+  if (token == "expr") {
+    return("")
+  }
+  if (token == "'!'") {
+    return("not ")
+  }
+  if (token == "OR") {
+    return("or ")
+  }
+  if (token == "SPECIAL" & text == "%>%") {
+    return("then")
+  }
+  if (token == "SPECIAL" & text == "%in%") {
+    return("matches")
+  }
+  if (token == "SYMBOL_FUNCTION_CALL") {
+    if (text == "c") {
+      return("a vector of ")
     }
-    if (token == "RIGHT_ASSIGN") {
-        return("into")
-    }
-    if (token == "NE") {
-        return("not equal")
-    }
-    if (token == "EQ") {
-        return("double equal")
-    }
-    if (token == "expr") {
-        return("")
-    }
-    if (token == "'!'") {
-        return("not ")
-    }
-    if (token == "OR") {
-        return("or ")
-    }
-    if (token == "SPECIAL" & text == "%>%") {
-        return("then")
-    }
-    if (token == "SPECIAL" & text == "%in%") {
-        return("matches")
-    }
-    if (token == "SYMBOL_FUNCTION_CALL") {
-        if (text == "c") {
-            return("a vector of ")
-        }
-        return(paste(function_call, text, function_call_end))
-    }
-    if (grepl("SYMBOL", token)) {
-        return(text)
-    }
-    if (token == "'('") {
-        return("open paren")
-    }
-    if (token == "')'") {
-        return("close paren")
-    }
-    if (token == "'['") {
-        return("open square bracket")
-    }
-    if (token == "']'") {
-        return("close square bracket")
-    }
-    if (token == "'{'") {
-        return("open curly bracket")
-    }
-    if (token == "'}'") {
-        return("close curly bracket")
-    }
-    if (token == "'~'") {
-        return("by ")
-    }
-    if (token == "STR_CONST") {
-        return(paste0("string ", text))
-    }
+    return(paste(function_call, text, function_call_end))
+  }
+  if (grepl("SYMBOL", token)) {
     return(text)
+  }
+  if (token == "'('") {
+    return("open paren")
+  }
+  if (token == "')'") {
+    return("close paren")
+  }
+  if (token == "'['") {
+    return("open square bracket")
+  }
+  if (token == "']'") {
+    return("close square bracket")
+  }
+  if (token == "'{'") {
+    return("open curly bracket")
+  }
+  if (token == "'}'") {
+    return("close curly bracket")
+  }
+  if (token == "LBB") {
+    return("open double-square bracket")
+  }
+  if (token == "'~'") {
+    return("by ")
+  }
+  if (token == "'?'") {
+    return("help for ")
+  }
+  if (token == "NS_GET") {  # '::'
+    return("package function ")
+  }
+  if (token == "NS_GET_INT") {  # ':::'
+    return("package internal function ")
+  }
+  if (token == "STR_CONST") {
+    return(paste0("string ", text))
+  }
+  return(text)
 }
 
