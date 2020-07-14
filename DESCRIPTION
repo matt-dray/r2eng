@@ -17,9 +17,7 @@ LazyData: true
 RoxygenNote: 7.1.1
 Language: en-GB
 Depends: 
-    R (>= 2.10),
-    lintr,
-    purrr
-Suggests:
-    tibble (>= 3.0.2),
-    usethis (>= 1.6.1)
+    R (>= 2.10)
+Imports:
+    lintr (>= 2.0.1),
+    purrr (>= 0.3.4)
