@@ -4,7 +4,7 @@
 \alias{r2eng}
 \title{Convert R Code To Spoken English}
 \usage{
-r2eng(expression, speak = TRUE)
+r2eng(expression, speak = TRUE, function_call_end = "of ")
 }
 \arguments{
 \item{expression}{An R expression as a character string.}
@@ -13,7 +13,7 @@ r2eng(expression, speak = TRUE)
 Requires speakers on your machine.}
 }
 \value{
-A list with three elements: the input R expression, the 'translated'
+An r2eng object, which is a list with three elements: the input R expression, the 'translated'
     English expression and a data frame showing the translation of each
     R element.
 }

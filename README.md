@@ -28,7 +28,7 @@ You can install the development version of {r2eng} from GitHub with:
 remotes::install_github("matt-dray/r2eng")
 ```
 
-There are no dependencies.
+This package depends on lintr and purrr.
 
 ## Example
 
@@ -36,66 +36,69 @@ There’s currently one function in the package: `r2eng()`.
 
 Pass it an R expression like this:
 
-``` r
-r2eng::r2eng("variable <- 1", speak = FALSE)
-# $r_expression
-# [1] "variable <- 1"
-# 
-# $eng_expression
-# [1] "variable gets 1"
-# 
-# $translation_map
-#          r      eng
-# 1 variable variable
-# 2       <-     gets
-# 3        1        1
-```
-
 Set speak to `TRUE` for a system call that will read the English
 sentence out loud.
 
-There’s an in-built dictionary, `r2eng_dictionary`, that maps R symbols
-to English terms:
-
 ``` r
-r2eng::r2eng_dictionary
-#       r                  eng
-# 1    <-                 gets
-# 2    ->                 into
-# 3     =                   is
-# 4   %>%                 then
-# 5  %in%              matches
-# 6     |                   or
-# 7     !                  not
-# 8     ?      search help for
-# 9     ~                   by
-# 10    (     open parenthesis
-# 11    )    close parenthesis
-# 12    [  open square bracket
-# 13    ] close square bracket
-# 14    {     open curly brace
-# 15    }    close curly brace
+library(r2eng)
+# Loading required package: lintr
+# Loading required package: purrr
+r2eng::r2eng("variable <- 1", speak = TRUE)
+# Original expression: variable <- 1
+# English expression: variable gets 1
 ```
 
-I’m always seeking to expand this dictionary and improve the
-`r2eng_dictionary` object. You can add ideas to [this GitHub
-issue](https://github.com/matt-dray/r2eng/issues/1).
+``` r
+obj <- r2eng::r2eng("hello <- c(TRUE, FALSE, 'banana' %in% c('apple', 'orange'))", speak = FALSE)
+obj
+# Original expression: hello <- c(TRUE, FALSE, 'banana' %in% c('apple', 'orange'))
+# English expression: hello gets a vector of open paren TRUE , FALSE , string 'banana' matches a vector of open paren string 'apple' , string 'orange' close paren close paren
+```
+
+``` r
+speak(obj)
+```
+
+``` r
+r2eng::r2eng("mtcars %>% select(mpg > 22) %>% mutate(gear4 = gear == 4)")
+# Original expression: mtcars %>% select(mpg > 22) %>% mutate(gear4 = gear == 4)
+# English expression: mtcars then select of open paren mpg > 22 close paren then mutate of open paren gear4 = gear double equal 4 close paren
+```
+
+``` r
+r2eng::r2eng("ggplot(diamonds, aes(x=carat, y=price, color=cut)) + geom_point() + geom_smooth()")
+# Original expression: ggplot(diamonds, aes(x=carat, y=price, color=cut)) + geom_point() + geom_smooth()
+# English expression: ggplot of open paren diamonds , aes of open paren x = carat , y = price , color = cut close paren close paren + geom_point of open paren close paren + geom_smooth of open paren close paren
+```
+
+It can understand the meaning of =
+
+``` r
+r2eng::r2eng("x = c(1, 2, 3)")
+# Original expression: x = c(1, 2, 3)
+# English expression: x gets a vector of open paren 1 , 2 , 3 close paren
+```
+
+``` r
+r2eng::r2eng("plot(x = c(1, 2, 3), y = c(5, 6, 7))")
+# Original expression: plot(x = c(1, 2, 3), y = c(5, 6, 7))
+# English expression: plot of open paren x = a vector of open paren 1 , 2 , 3 close paren , y = a vector of open paren 5 , 6 , 7 close paren close paren
+```
 
 ## Work in progress (WIP)
 
 There is much to do. Most R expressions won’t currently work with the
 `r2eng()` function.
 
-  - \[ \] Expand the dictionary
-  - \[ \] Split out parentheses for evaluation
-  - \[ \] Ensure multi-line translation
-  - \[ \] Smart check of expression structure (e.g. ‘=’ will be used as
+  - [ ] Expand the dictionary
+  - [x] Split out parentheses for evaluation
+  - [ ] Ensure multi-line translation
+  - [x] Smart check of expression structure (e.g. ‘=’ will be used as
     gets if used for assignment, but will be ‘is’ elsewhere)
-  - \[ \] Allow for variant opinions on translations
-  - \[ \] Account for dialects (dollar, formula, tidyverse, etc,
-    notation)
-  - \[ \] Test\!
-  - \[ \] Add vignettes
+  - [ ] Allow for variant opinions on translations
+  - [ ] Account for dialects (dollar, formula, tidyverse, etc, notation)
+  - [ ] Test\!
+  - [ ] Add vignettes
 
 ## Code of Conduct
 
