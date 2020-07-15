@@ -1,12 +1,19 @@
+#' @rdname r2eng 
+#' @export
+r2eng_from_string <- function(expression, speak = TRUE, function_call_end = "of ") {
+  .convert_quoted_expression(rlang::parse_expr(expression), speak = speak, function_call_end = function_call_end)
+}
+
+
 #' Convert R Code To Spoken English
 #'
 #' Takes an R expression and converts it to English by matching recognised
 #' symbols with an opinionated list of English 'translations'.
 #'
-#' @param expression An R expression as a character string.
+#' @param expression An R expression
 #' @param speak Do you want your system to try and say the English expression?
 #'     Requires speakers on your machine.
-#'
+#' @param function_call_end character, what should be added after a function call, e.g. setting this parameter to "of", this function translates summary(x) to "summrary of x open paren x close paren".
 #' @return An r2eng object, which is a list with three elements: the input R expression, the 'translated'
 #'     English expression and a data frame showing the translation of each
 #'     R element.
@@ -15,27 +22,28 @@
 #'
 #' @examples
 #' \dontrun{
-#' r2eng("variable <- 1")
+#' r2eng(variable <- 1)
 #' }
 r2eng <- function(expression, speak = TRUE, function_call_end = "of ") {
-
-  # Basic input check for expression argument
-  if (!is.character(expression)) {
-    stop("The 'expression' argument must be a character string.\n")
-  }
+  quoted_expression <- substitute(expression)
   # Basic input check for speak argument
   if (!is.logical(speak)) {
     stop("The 'speak' argument must be TRUE or FALSE.\n")
   }
-  trees <- .convert_expr_tree(expression)
+  return(.convert_quoted_expression(quoted_expression, speak = speak, function_call_end = function_call_end))
+}
+
+.convert_quoted_expression <- function(quoted_expression, speak = TRUE, function_call_end = "of ") {
+  trees <- .convert_expr_tree(deparse(quoted_expression))
   eng_vec <- purrr::map2_chr(trees$token, trees$text, .translate, function_call_end = function_call_end)
   eng_expression <- gsub(" +", " ", paste0(eng_vec, collapse = " "))
   trees$eng <- eng_vec
   # Output a list of results
   results <- list(
-    r_expression = expression,  # original R expression
+    r_expression = deparse(quoted_expression),  # original R expression as string
     eng_expression = eng_expression,  # tranlsated English expression
-    translation_map = trees  # table mapping R to English
+    translation_map = trees,  # table mapping R to English
+    quoted_expression = quoted_expression
   )
   class(results) <- append(class(results), "r2eng")
   if (speak) {
@@ -54,6 +62,22 @@ speak <- function(r2eng, ...) {
     UseMethod("speak", r2eng)
 }
 
+#' Evaluate expression in r2eng object
+#'
+#' This function evaluates the expression of the r2eng object.
+#' @param r2eng r2eng object to evaluate
+#' @param envir environment to evaluate the expression, default to current environment
+#' @return Nothing
+#' @export
+evaluate <- function(r2eng, ...) {
+    UseMethod("evaluate", r2eng)
+}
+
+#' @rdname evaluate
+#' @export
+evaluate.r2eng <- function(r2eng, envir = parent.frame(), ...) {
+    eval(r2eng$quoted_expression, envir = envir)
+}
 
 #' @rdname speak
 #' @export
