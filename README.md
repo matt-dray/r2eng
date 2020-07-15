@@ -100,9 +100,9 @@ r2eng::r2eng(plot(x = c(1, 2, 3), y = c(5, 6, 7)), speak = FALSE)
 
 ## r2eng versus r2eng\_from\_string
 
-The Raison d’être for `r2eng\_from\_string` is to handle some
-exceptional cases, e.g. expression using `=` for variable assignment
-above. It is also useful when you pipe an expression.
+The Raison d’être for `r2eng_from_string` is to handle some exceptional
+cases, e.g. expression using `=` for variable assignment above. It is
+also useful when you pipe an expression.
 
 ``` r
 library(magrittr)
