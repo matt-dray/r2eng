@@ -1,4 +1,4 @@
-#' @rdname r2eng 
+#' @rdname r2eng
 #' @export
 r2eng_from_string <- function(expression, speak = TRUE, function_call_end = "of ") {
   .convert_quoted_expression(rlang::parse_expr(expression), speak = speak, function_call_end = function_call_end)
@@ -126,6 +126,18 @@ print.r2eng <- function(r2eng, ...) {
   }
   if (token == "OR") {
     return("or ")
+  }
+  if (token == "GT") {
+    return("is greater than ")
+  }
+  if (token == "LT") {
+    return("is less than ")
+  }
+  if (token == "GE") {
+    return("is greater than or equal to ")
+  }
+  if (token == "LE") {
+    return("is less than or equal to ")
   }
   if (token == "SPECIAL" & text == "%>%") {
     return("then")
