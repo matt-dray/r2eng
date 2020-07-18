@@ -15,15 +15,26 @@ knitr::opts_chunk$set(
 
 # {r2eng}
 
+ɑː ˈtuː /eng/
+
 <!-- badges: start -->
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 <!-- badges: end -->
 
-The goal of the {r2eng} (as in 'R to English') package is to take an R expression and 'translate' it to an English sentence. Make R speakable!
+Make R speakable!
 
-The project inspired by [Amelia McNamara](https://twitter.com/AmeliaMN)'s useR! 2020 talk ([YouTube](https://www.youtube.com/watch?v=ckW9sSdIVAc), [slides](https://www.amelia.mn/SpeakingR/#1)).
+The goal of {r2eng} (as in 'R to English') is to take an R expression and 'translate' it to an English sentence. 
 
-This project is a work in progress and highly opinionated.
+The package is intended to:
+
+* improve communication between teachers and learners
+* make R discussions in English more accessible to non-English speakers
+* provide an extra audio evaluation tool for users who are blind or have low vision
+* for any R user that's curious about how to 'speak R'
+
+The project was inspired by [Amelia McNamara](https://twitter.com/AmeliaMN)'s useR! 2020 talk called 'Speaking R' ([YouTube](https://www.youtube.com/watch?v=ckW9sSdIVAc), [slides](https://www.amelia.mn/SpeakingR/#1)).
+
+This project is a work in progress and highly opinionated. Contributions are welcome, but please see the [Code of Conduct](#conduct).
 
 ## Installation
 
@@ -33,71 +44,102 @@ You can install the development version of {r2eng} from GitHub with:
 remotes::install_github("matt-dray/r2eng")
 ```
 
-This package depends on {lintr} and {purrr}.
+This package depends on {lintr}, {purrr} and {rlang}.
 
 ## Examples
 
-There's currently one function in the package: `r2eng()`.
-
-Pass it an R expression like this:
+The main function in the package is `r2eng()`. It uses [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html), so you pass it a bare R expression like this:
 
 ```{r example}
-library(r2eng)
 r2eng::r2eng(variable <- 1, speak = TRUE)
 ```
 
 Set speak to `TRUE` for a system call that will read the English sentence out loud.
 
+A more complex example:
+
 ```{r example2}
-obj <- r2eng::r2eng(hello <- c(TRUE, FALSE, 'banana' %in% c('apple', 'orange')), speak = FALSE)
+obj <- r2eng::r2eng(
+  hello <- c(TRUE, FALSE, 'banana' %in% c('apple', 'orange')),
+  speak = FALSE
+)
+
 obj
 ```
 
-An `r2eng` has two methods: `speak` to speak the English sentence.
+### Methods
+
+An `r2eng` object has two methods: `speak` and `evaluate`.
+
+Use `speak` to speak the English sentence.
 
 ```{r example3}
-speak(obj)
+r2eng::speak(obj)
 ```
 
-`evaluate` to evaluate the expression.
+Use `evaluate` to evaluate the expression.
 
 ```{r example3eval}
-evaluate(obj)
+r2eng::evaluate(obj)
 hello
 ```
 
-More complicated examples.
+From your r2eng object you can access the original R expression (`r_expression`), English translation (`eng_expression`) and quoted expression (`quoted_expression`). You can also see the parse tree output via {lintr}:
+
+```{r map}
+head(obj$translation_map)
+```
+
+### Further examples
+
+Here's an example using the pipe (`%>%`) and two types of 'equals':
 
 ```{r example4}
-r2eng::r2eng(mtcars %>% select(mpg > 22) %>% mutate(gear4 = gear == 4), speak = FALSE)
+library(magrittr)
+r2eng::r2eng(
+  mtcars %>% filter(mpg > 22) %>% mutate(gear4 = gear == 4),
+  speak = FALSE
+)
 ```
+
+This example uses the 'plus' constructor from {ggplot2}:
 
 ```{r example5}
-r2eng::r2eng(ggplot(diamonds, aes(x=carat, y=price, color=cut)) + geom_point() + geom_smooth(), speak = FALSE)
+r2eng::r2eng(
+  ggplot(diamonds, aes(x=carat, y=price, color=cut)) + geom_point() + geom_smooth(),
+  speak = FALSE
+)
 ```
 
-It can understand the meaning of `=` when used for assignment versus specifying arguments. But for some expressions (e.g. those using `=` for variable assignment), you must use `r2eng_from_string`. ^[r2eng uses [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html). Feeding an expression such as `x = c(1, 2, 3)` would confuse `r2eng` that you want to pass an argument `c(1, 2, 3)` to the parameter `x`. This package has been opinionated: It highlights using = for variable assignment is not a good idea.]
+This example shows what happens when you pass vectors:
 
 ```{r example6}
-r2eng::r2eng_from_string("x = c(1, 2, 3)", speak = FALSE)
-```
-
-```{r example7}
 r2eng::r2eng(plot(x = c(1, 2, 3), y = c(5, 6, 7)), speak = FALSE)
 ```
 
-## r2eng versus r2eng\_from\_string
+### Passing a string
 
-The Raison d'être for `r2eng_from_string` is to handle some exceptional cases, e.g. expression using `=` for variable assignment above. It is also useful when you pipe an expression.
+The `r2eng()` function understands the meaning of `=` when used for assignment versus specifying arguments, but feeding an expression such as `x = c(1, 2, 3)` would confuse `r2eng()` that you want to pass an argument `c(1, 2, 3)` to the parameter `x`. 
+
+This is because `r2eng()` uses [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html). 
+
+In such cases, you must use `r2eng_from_string()` instead:
+
+```{r example7}
+r2eng::r2eng_from_string("x = c(1, 2, 3)", speak = FALSE)
+```
+
+Another exceptional case for `r2eng_from_string()` is when piping and expression:
 
 ```{r pipe}
-library(magrittr)
-"non_english <- c('ceci n est pas une pipe', 'Ich bin ein Berliner', '我其實唔識講廣東話')" %>% r2eng_from_string(speak = TRUE)
+"non_english <- c('ceci n est pas une pipe', 'Ich bin ein Berliner', '我其實唔識講廣東話')" %>% 
+  r2eng::r2eng_from_string(speak = TRUE)
 ```
+
 
 ## Work in progress (WIP)
 
-There is much to do. Most R expressions won't currently work with the `r2eng()` function.
+There is much to do.
 
 - [ ] Expand the dictionary
 - [X] Split out parentheses for evaluation
@@ -106,10 +148,10 @@ There is much to do. Most R expressions won't currently work with the `r2eng()` 
 - [ ] Allow for variant opinions on translations
 - [ ] Account for dialects (dollar, formula, tidyverse, etc, notation)
 - [ ] Test!
-- [ ] Add vignettes
+- [ ] Add documentation (vignettes, {pkgdown} site)
 
-## Code of Conduct
+## Code of Conduct {#conduct}
 
-I welcome contributions.
+Contributions are welcome from everyone.
 
 Please note that the {r2eng} project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

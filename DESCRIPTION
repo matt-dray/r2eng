@@ -1,14 +1,13 @@
 Package: r2eng
-Version: 0.0.0.9002
+Version: 0.0.0.9003
 Type: Package
 Title: Translate R Code To An English Sentence
 Description: Take an R expression and convert it to English by matching
     recognised symbols with an opinionated list of English 'translations'.
     Inspired By Amelia McNamara's useR! 2020 conference talk.
-Authors@R: c(person(
-    "Matt", "Dray", 
-    email = "mwdray@gmail.com",
-    role = c("aut", "cre")), person("Chung-hong", "Chan", email = "chainsawtiney@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0002-6232-7530")))
+Authors@R: c(
+    person("Matt", "Dray", email = "mwdray@gmail.com",role = c("aut", "cre")),
+    person("Chung-hong", "Chan", email = "chainsawtiney@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0002-6232-7530")))
 License: MIT + file LICENSE
 URL: https://github.com/matt-dray/r2eng/
 BugReports: https://github.com/matt-dray/r2eng/issues
@@ -21,4 +20,4 @@ Depends:
 Imports:
     lintr (>= 2.0.1),
     purrr (>= 0.3.4),
-    rlang
+    rlang (>= 0.4.7)

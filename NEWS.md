@@ -1,6 +1,12 @@
+# {r2eng} 0.0.0.9003
+
+* Added non-standard evaluation to `r2eng()` and introduced `r2eng_from_string()` (thanks to @chainsawriot).
+* Added more translations: >, <, >=, <=.
+* Updated README with clearer goals.
+
 # {r2eng} 0.0.0.9002
 
-* Added parsing method thanks to @chainsawriot.
+* Added parsing method (thanks to @chainsawriot).
 * Removed manually-updated dictionary object.
 
 # {r2eng} 0.0.0.9001
