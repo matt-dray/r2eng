@@ -20,4 +20,5 @@ Depends:
     R (>= 2.10)
 Imports:
     lintr (>= 2.0.1),
-    purrr (>= 0.3.4)
+    purrr (>= 0.3.4),
+    rlang

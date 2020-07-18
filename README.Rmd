@@ -43,36 +43,56 @@ Pass it an R expression like this:
 
 ```{r example}
 library(r2eng)
-r2eng::r2eng("variable <- 1", speak = TRUE)
+r2eng::r2eng(variable <- 1, speak = TRUE)
 ```
 
 Set speak to `TRUE` for a system call that will read the English sentence out loud.
 
 ```{r example2}
-obj <- r2eng::r2eng("hello <- c(TRUE, FALSE, 'banana' %in% c('apple', 'orange'))", speak = FALSE)
+obj <- r2eng::r2eng(hello <- c(TRUE, FALSE, 'banana' %in% c('apple', 'orange')), speak = FALSE)
 obj
 ```
+
+An `r2eng` has two methods: `speak` to speak the English sentence.
 
 ```{r example3}
 speak(obj)
 ```
 
+`evaluate` to evaluate the expression.
+
+```{r example3eval}
+evaluate(obj)
+hello
+```
+
+More complicated examples.
+
 ```{r example4}
-r2eng::r2eng("mtcars %>% select(mpg > 22) %>% mutate(gear4 = gear == 4)")
+r2eng::r2eng(mtcars %>% select(mpg > 22) %>% mutate(gear4 = gear == 4), speak = FALSE)
 ```
 
 ```{r example5}
-r2eng::r2eng("ggplot(diamonds, aes(x=carat, y=price, color=cut)) + geom_point() + geom_smooth()")
+r2eng::r2eng(ggplot(diamonds, aes(x=carat, y=price, color=cut)) + geom_point() + geom_smooth(), speak = FALSE)
 ```
 
-It can understand the meaning of `=` when used for assignment versus specifying arguments.
+It can understand the meaning of `=` when used for assignment versus specifying arguments. But for some expressions (e.g. those using `=` for variable assignment), you must use `r2eng_from_string`. ^[r2eng uses [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html). Feeding an expression such as `x = c(1, 2, 3)` would confuse `r2eng` that you want to pass an argument `c(1, 2, 3)` to the parameter `x`. This package has been opinionated: It highlights using = for variable assignment is not a good idea.]
 
 ```{r example6}
-r2eng::r2eng("x = c(1, 2, 3)")
+r2eng::r2eng_from_string("x = c(1, 2, 3)", speak = FALSE)
 ```
 
 ```{r example7}
-r2eng::r2eng("plot(x = c(1, 2, 3), y = c(5, 6, 7))")
+r2eng::r2eng(plot(x = c(1, 2, 3), y = c(5, 6, 7)), speak = FALSE)
+```
+
+## r2eng versus r2eng\_from\_string
+
+The Raison d'être for `r2eng_from_string` is to handle some exceptional cases, e.g. expression using `=` for variable assignment above. It is also useful when you pipe an expression.
+
+```{r pipe}
+library(magrittr)
+"non_english <- c('ceci n est pas une pipe', 'Ich bin ein Berliner', '我其實唔識講廣東話')" %>% r2eng_from_string(speak = TRUE)
 ```
 
 ## Work in progress (WIP)
