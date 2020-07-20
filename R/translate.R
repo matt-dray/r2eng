@@ -106,59 +106,74 @@ print.r2eng <- function(r2eng, ...) {
 
 
 .translate <- function(token, text, function_call = "", function_call_end = "") {
-  if (token == "LEFT_ASSIGN" | token == "EQ_ASSIGN") {
-    return("gets")
+
+  # Arithmetic/conditions
+
+  if (token == "'+'") {
+    return("plus")
   }
-  if (token == "RIGHT_ASSIGN") {
-    return("into")
+  if (token == "'-'") {
+    return("minus")
   }
-  if (token == "NE") {
-    return("not equal")
+  if (token == "'*'") {
+    return("times")
   }
-  if (token == "EQ") {
-    return("double equal")
+  if (token == "'/'") {
+    return("over")
   }
-  if (token == "expr") {
-    return("")
-  }
-  if (token == "'!'") {
-    return("not ")
-  }
-  if (token == "OR") {
-    return("or ")
+  if (token %in% c("'^'", "'**'")) {
+    return("raised to the power of")
   }
   if (token == "GT") {
-    return("is greater than ")
-  }
-  if (token == "LT") {
-    return("is less than ")
+    return("is greater than")
   }
   if (token == "GE") {
-    return("is greater than or equal to ")
+    return("is greater than or equal to")
+  }
+  if (token == "LT") {
+    return("is less than")
   }
   if (token == "LE") {
-    return("is less than or equal to ")
+    return("is less than or equal to")
   }
-  if (token == "SPECIAL" & text == "%>%") {
-    return("then")
+  if (token == "EQ") {
+    return("double equals")
   }
-  if (token == "SPECIAL" & text == "%in%") {
-    return("matches")
+  if (token == "NE") {
+    return("not equal to")
   }
-  if (token == "SYMBOL_FUNCTION_CALL") {
-    if (text == "c") {
-      return("a vector of ")
-    }
-    return(paste(function_call, text, function_call_end))
+  if (token == "'!'") {
+    return("not")
   }
-  if (grepl("SYMBOL", token)) {
-    return(text)
+  if (token == "AND") {
+    return("and")
   }
+  if (token == "OR") {
+    return("or")
+  }
+  if (token == "AND2") {
+    return("double-and")
+  }
+  if (token == "OR2") {
+    return("double-or")
+  }
+
+  # Braces
+
   if (token == "'('") {
     return("open paren")
   }
   if (token == "')'") {
     return("close paren")
+  }
+  if (token == "'{'") {
+    return("open curly brace")
+  }
+  if (token == "'}'") {
+    return("close curly brace")
+  }
+  if (token == "LBB") {
+    return("open double-square bracket")
   }
   if (token == "'['") {
     return("open square bracket")
@@ -166,30 +181,68 @@ print.r2eng <- function(r2eng, ...) {
   if (token == "']'") {
     return("close square bracket")
   }
-  if (token == "'{'") {
-    return("open curly bracket")
+
+  # Assignment
+
+  if (token == "LEFT_ASSIGN" | token == "EQ_ASSIGN") {
+    return("gets")
   }
-  if (token == "'}'") {
-    return("close curly bracket")
+  if (token == "RIGHT_ASSIGN") {
+    return("into")
   }
-  if (token == "LBB") {
-    return("open double-square bracket")
+
+  # Infix operators
+
+  if (token == "SPECIAL" & text == "%in%") {
+    return("matches")
   }
+  if (token == "SPECIAL" & text == "%>%") {
+    return("then")
+  }
+
+  # Functions
+
+  if (token == "SYMBOL_FUNCTION_CALL") {
+    if (text == "c") {
+      return("a vector of")
+    }
+    return(paste(function_call, text, function_call_end))
+  }
+
+  # Definition operator
+
   if (token == "'~'") {
-    return("by ")
+    return("by")
   }
+
+  # Help
+
   if (token == "'?'") {
-    return("help for ")
+    return("help for")
   }
+
+  # Namespace
+
   if (token == "NS_GET") {  # '::'
-    return("package function ")
+    return("double-colon")
   }
   if (token == "NS_GET_INT") {  # ':::'
-    return("package internal function ")
+    return("triple-colon")
+  }
+
+  # Unnamed tokens
+
+  if (grepl("SYMBOL", token)) {
+    return(text)
   }
   if (token == "STR_CONST") {
     return(paste0("string ", text))
   }
+  if (token == "expr") {
+    return("")
+  }
+
   return(text)
+
 }
 
