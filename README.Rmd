@@ -30,7 +30,7 @@ The package is intended to:
 * improve communication between teachers and learners
 * make R discussions in English more accessible to non-English speakers
 * provide an extra audio evaluation tool for users who are blind or have low vision
-* for any R user that's curious about how to 'speak R'
+* be of interest to any R user that's curious about how R expressions might be vocalised
 
 The project was inspired by [Amelia McNamara](https://twitter.com/AmeliaMN)'s useR! 2020 talk called 'Speaking R' ([YouTube](https://www.youtube.com/watch?v=ckW9sSdIVAc), [slides](https://www.amelia.mn/SpeakingR/#1)).
 
@@ -136,6 +136,15 @@ Another exceptional case for `r2eng_from_string()` is when piping and expression
   r2eng::r2eng_from_string(speak = TRUE)
 ```
 
+## RStudio addin
+
+Installing this package also installs an [RStudio addin](https://rstudio.github.io/rstudioaddins/).
+
+Select an R expression in the editor and then under 'Addins', go to 'Vocalise R expression' under 'R2ENG'. The selected text will be spoken by your computer. 
+
+You could bind this addin to a keyboard shortcut in RStudio by going to 'Tools', then 'Modify Keyboard Shortcuts...'. Perhaps <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>.
+
+As with the rest of this package, vocalisation is only possible for macOS and with speakers.
 
 ## Work in progress (WIP)
 
