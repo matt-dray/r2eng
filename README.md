@@ -24,7 +24,8 @@ The package is intended to:
     speakers
   - provide an extra audio evaluation tool for users who are blind or
     have low vision
-  - for any R user that’s curious about how to ‘speak R’
+  - be of interest to any R user that’s curious about how R expressions
+    might be vocalised
 
 The project was inspired by [Amelia
 McNamara](https://twitter.com/AmeliaMN)‘s useR\! 2020 talk called
@@ -97,12 +98,12 @@ via {lintr}:
 
 ``` r
 head(obj$translation_map)
-#                   token  text          eng
-# 45                 expr                   
-# 1                SYMBOL hello        hello
-# 3                  expr                   
-# 2           LEFT_ASSIGN    <-         gets
-# 43                 expr                   
+#                   token  text         eng
+# 40                 expr                  
+# 1                SYMBOL hello       hello
+# 3                  expr                  
+# 2           LEFT_ASSIGN    <-        gets
+# 38                 expr                  
 # 4  SYMBOL_FUNCTION_CALL     c a vector of
 ```
 
@@ -117,7 +118,7 @@ r2eng::r2eng(
   speak = FALSE
 )
 # Original expression: mtcars %>% filter(mpg > 22) %>% mutate(gear4 = gear == 4)
-# English expression: mtcars then filter of open paren mpg is greater than 22 close paren then mutate of open paren gear4 = gear double equal 4 close paren
+# English expression: mtcars then filter of open paren mpg is greater than 22 close paren then mutate of open paren gear4 = gear double equals 4 close paren
 ```
 
 This example uses the ‘plus’ constructor from {ggplot2}:
@@ -129,7 +130,7 @@ r2eng::r2eng(
 )
 # Original expression: ggplot(diamonds, aes(x = carat, y = price, color = cut)) + geom_point() + 
 #  Original expression:     geom_smooth()
-# English expression: ggplot of open paren diamonds , aes of open paren x = carat , y = price , color = cut close paren close paren + geom_point of open paren close paren + geom_smooth of open paren close paren
+# English expression: ggplot of open paren diamonds , aes of open paren x = carat , y = price , color = cut close paren close paren plus geom_point of open paren close paren plus geom_smooth of open paren close paren
 ```
 
 This example shows what happens when you pass vectors:
@@ -169,19 +170,36 @@ expression:
 # English expression: non_english gets a vector of open paren string "ceci n est pas une pipe" , string "Ich bin ein Berliner" , string "我其實唔識講廣東話" close paren
 ```
 
+## RStudio addin
+
+Installing this package also installs an [RStudio
+addin](https://rstudio.github.io/rstudioaddins/).
+
+Select an R expression in the editor and then under ‘Addins’, go to
+‘Vocalise R expression’ under ‘R2ENG’. The selected text will be
+spoken by your computer.
+
+You could bind this addin to a keyboard shortcut in RStudio by going to
+‘Tools’, then ‘Modify Keyboard Shortcuts…’. Perhaps <kbd>Cmd</kbd> +
+<kbd>Shift</kbd> + <kbd>V</kbd>.
+
+As with the rest of this package, vocalisation is only possible for
+macOS and with speakers.
+
 ## Work in progress (WIP)
 
 There is much to do.
 
-  - [ ] Expand the dictionary
-  - [x] Split out parentheses for evaluation
-  - [ ] Ensure multi-line translation
-  - [x] Smart check of expression structure (e.g. ‘=’ will be used as
+  - \[ \] Expand the dictionary
+  - \[X\] Split out parentheses for evaluation
+  - \[ \] Ensure multi-line translation
+  - \[X\] Smart check of expression structure (e.g. ‘=’ will be used as
     gets if used for assignment, but will be ‘is’ elsewhere)
-  - [ ] Allow for variant opinions on translations
-  - [ ] Account for dialects (dollar, formula, tidyverse, etc, notation)
-  - [ ] Test\!
-  - [ ] Add documentation (vignettes, {pkgdown} site)
+  - \[ \] Allow for variant opinions on translations
+  - \[ \] Account for dialects (dollar, formula, tidyverse, etc,
+    notation)
+  - \[ \] Test\!
+  - \[ \] Add documentation (vignettes, {pkgdown} site)
 
 ## Code of Conduct
 

@@ -1,0 +1,4 @@
+Name: Vocalise An R Expression
+Description: Vocalise selected R expression aloud in English (macOS only).
+Binding: r2eng_vocalise
+Interactive: false
