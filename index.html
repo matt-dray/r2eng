@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">r2eng</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9004</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@
 <li>improve communication between teachers and learners</li>
 <li>make R discussions in English more accessible to non-English speakers</li>
 <li>provide an extra audio evaluation tool for users who are blind or have low vision</li>
-<li>for any R user that’s curious about how to ‘speak R’</li>
+<li>be of interest to any R user that’s curious about how R expressions might be vocalised</li>
 </ul>
 <p>The project was inspired by <a href="https://twitter.com/AmeliaMN">Amelia McNamara</a>‘s useR! 2020 talk called ’Speaking R’ (<a href="https://www.youtube.com/watch?v=ckW9sSdIVAc">YouTube</a>, <a href="https://www.amelia.mn/SpeakingR/#1">slides</a>).</p>
 <p>This project is a work in progress and highly opinionated. Contributions are welcome, but please see the <a href="#conduct">Code of Conduct</a>.</p>
@@ -124,12 +124,12 @@
 <span class="co"># [1]  TRUE FALSE FALSE</span></pre></div>
 <p>From your r2eng object you can access the original R expression (<code>r_expression</code>), English translation (<code>eng_expression</code>) and quoted expression (<code>quoted_expression</code>). You can also see the parse tree output via {lintr}:</p>
 <div class="sourceCode" id="cb6"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">obj</span>$<span class="no">translation_map</span>)
-<span class="co">#                   token  text          eng</span>
-<span class="co"># 45                 expr                   </span>
-<span class="co"># 1                SYMBOL hello        hello</span>
-<span class="co"># 3                  expr                   </span>
-<span class="co"># 2           LEFT_ASSIGN    &lt;-         gets</span>
-<span class="co"># 43                 expr                   </span>
+<span class="co">#                   token  text         eng</span>
+<span class="co"># 40                 expr                  </span>
+<span class="co"># 1                SYMBOL hello       hello</span>
+<span class="co"># 3                  expr                  </span>
+<span class="co"># 2           LEFT_ASSIGN    &lt;-        gets</span>
+<span class="co"># 38                 expr                  </span>
 <span class="co"># 4  SYMBOL_FUNCTION_CALL     c a vector of</span></pre></div>
 </div>
 <div id="further-examples" class="section level3">
@@ -142,7 +142,7 @@
   <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>
 )
 <span class="co"># Original expression: mtcars %&gt;% filter(mpg &gt; 22) %&gt;% mutate(gear4 = gear == 4)</span>
-<span class="co"># English expression: mtcars then filter of open paren mpg is greater than 22 close paren then mutate of open paren gear4 = gear double equal 4 close paren</span></pre></div>
+<span class="co"># English expression: mtcars then filter of open paren mpg is greater than 22 close paren then mutate of open paren gear4 = gear double equals 4 close paren</span></pre></div>
 <p>This example uses the ‘plus’ constructor from {ggplot2}:</p>
 <div class="sourceCode" id="cb8"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu">r2eng</span>(
   <span class="fu">ggplot</span>(<span class="no">diamonds</span>, <span class="fu">aes</span>(<span class="kw">x</span><span class="kw">=</span><span class="no">carat</span>, <span class="kw">y</span><span class="kw">=</span><span class="no">price</span>, <span class="kw">color</span><span class="kw">=</span><span class="no">cut</span>)) + <span class="fu">geom_point</span>() + <span class="fu">geom_smooth</span>(),
@@ -150,7 +150,7 @@
 )
 <span class="co"># Original expression: ggplot(diamonds, aes(x = carat, y = price, color = cut)) + geom_point() + </span>
 <span class="co">#  Original expression:     geom_smooth()</span>
-<span class="co"># English expression: ggplot of open paren diamonds , aes of open paren x = carat , y = price , color = cut close paren close paren + geom_point of open paren close paren + geom_smooth of open paren close paren</span></pre></div>
+<span class="co"># English expression: ggplot of open paren diamonds , aes of open paren x = carat , y = price , color = cut close paren close paren plus geom_point of open paren close paren plus geom_smooth of open paren close paren</span></pre></div>
 <p>This example shows what happens when you pass vectors:</p>
 <div class="sourceCode" id="cb9"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu">r2eng</span>(<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>), <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span>)), <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="co"># Original expression: plot(x = c(1, 2, 3), y = c(5, 6, 7))</span>
@@ -173,35 +173,35 @@
 <span class="co"># English expression: non_english gets a vector of open paren string "ceci n est pas une pipe" , string "Ich bin ein Berliner" , string "我其實唔識講廣東話" close paren</span></pre></div>
 </div>
 </div>
+<div id="rstudio-addin" class="section level2">
+<h2 class="hasAnchor">
+<a href="#rstudio-addin" class="anchor"></a>RStudio addin</h2>
+<p>Installing this package also installs an <a href="https://rstudio.github.io/rstudioaddins/">RStudio addin</a>.</p>
+<p>Select an R expression in the editor and then under ‘Addins’, go to ‘Vocalise R expression’ under ‘R2ENG’. The selected text will be spoken by your computer.</p>
+<p>You could bind this addin to a keyboard shortcut in RStudio by going to ‘Tools’, then ‘Modify Keyboard Shortcuts…’. Perhaps <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>.</p>
+<p>As with the rest of this package, vocalisation is only possible for macOS and with speakers.</p>
+</div>
 <div id="work-in-progress-wip" class="section level2">
 <h2 class="hasAnchor">
 <a href="#work-in-progress-wip" class="anchor"></a>Work in progress (WIP)</h2>
 <p>There is much to do.</p>
 <ul>
 <li>
-<input type="checkbox" disabled>
-Expand the dictionary</li>
+<br><span class="math display"></span><br> Expand the dictionary</li>
 <li>
-<input type="checkbox" disabled checked>
-Split out parentheses for evaluation</li>
+<br><span class="math display"><em>X</em></span><br> Split out parentheses for evaluation</li>
 <li>
-<input type="checkbox" disabled>
-Ensure multi-line translation</li>
+<br><span class="math display"></span><br> Ensure multi-line translation</li>
 <li>
-<input type="checkbox" disabled checked>
-Smart check of expression structure (e.g. ‘=’ will be used as gets if used for assignment, but will be ‘is’ elsewhere)</li>
+<br><span class="math display"><em>X</em></span><br> Smart check of expression structure (e.g. ‘=’ will be used as gets if used for assignment, but will be ‘is’ elsewhere)</li>
 <li>
-<input type="checkbox" disabled>
-Allow for variant opinions on translations</li>
+<br><span class="math display"></span><br> Allow for variant opinions on translations</li>
 <li>
-<input type="checkbox" disabled>
-Account for dialects (dollar, formula, tidyverse, etc, notation)</li>
+<br><span class="math display"></span><br> Account for dialects (dollar, formula, tidyverse, etc, notation)</li>
 <li>
-<input type="checkbox" disabled>
-Test!</li>
+<br><span class="math display"></span><br> Test!</li>
 <li>
-<input type="checkbox" disabled>
-Add documentation (vignettes, {pkgdown} site)</li>
+<br><span class="math display"></span><br> Add documentation (vignettes, {pkgdown} site)</li>
 </ul>
 </div>
 <div id="code-of-conduct" class="section level2">
