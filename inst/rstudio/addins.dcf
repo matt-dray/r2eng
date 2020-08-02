@@ -1,4 +1,10 @@
-Name: Vocalise An R Expression
-Description: Vocalise selected R expression aloud in English (macOS only).
-Binding: r2eng_vocalise
+Name: Speak R Expression In English
+Description: Let your system speak the selected R expression aloud in English
+    (macOS only).
+Binding: addin_speak
+Interactive: false
+
+Name: Print R Expression In English
+Description: Print the selected R expression with its English translation.
+Binding: addin_print
 Interactive: false
