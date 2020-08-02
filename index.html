@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">r2eng</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9005</span>
       </span>
     </div>
 
@@ -98,13 +98,13 @@
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
-<p>The main function in the package is <code>r2eng()</code>. It uses <a href="http://adv-r.had.co.nz/Computing-on-the-language.html">non-standard evaluation</a>, so you pass it a bare R expression like this:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu">r2eng</span>(<span class="no">variable</span> <span class="kw">&lt;-</span> <span class="fl">1</span>, <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<p>The main function in the package is <code><a href="reference/translate.html">translate()</a></code>. It uses <a href="http://adv-r.had.co.nz/Computing-on-the-language.html">non-standard evaluation</a>, so you pass it a bare R expression like this:</p>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/translate.html">translate</a></span>(<span class="no">variable</span> <span class="kw">&lt;-</span> <span class="fl">1</span>, <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="co"># Original expression: variable &lt;- 1</span>
 <span class="co"># English expression: variable gets 1</span></pre></div>
-<p>Set speak to <code>TRUE</code> for a system call that will read the English sentence out loud.</p>
+<p>Set <code>speak = TRUE</code> for a system call that will read the English sentence out loud (macOS only).</p>
 <p>A more complex example:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="no">obj</span> <span class="kw">&lt;-</span> <span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu">r2eng</span>(
+<div class="sourceCode" id="cb3"><pre class="r"><span class="no">obj</span> <span class="kw">&lt;-</span> <span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/translate.html">translate</a></span>(
   <span class="no">hello</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="st">'banana'</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'apple'</span>, <span class="st">'orange'</span>)),
   <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>
 )
@@ -115,15 +115,19 @@
 <div id="methods" class="section level3">
 <h3 class="hasAnchor">
 <a href="#methods" class="anchor"></a>Methods</h3>
-<p>An <code>r2eng</code> object has two methods: <code>speak</code> and <code>evaluate</code>.</p>
-<p>Use <code>speak</code> to speak the English sentence.</p>
+<p>An <code>r2eng</code> object has the methods <code>speak</code> and <code>evaluate</code>.</p>
+<p>Use <code>speak</code> to launch a system call that will vocalise the translated English sentence for the given R expression (macOS only).</p>
 <div class="sourceCode" id="cb4"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/speak.html">speak</a></span>(<span class="no">obj</span>)</pre></div>
 <p>Use <code>evaluate</code> to evaluate the expression.</p>
 <div class="sourceCode" id="cb5"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/evaluate.html">evaluate</a></span>(<span class="no">obj</span>, <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="no">hello</span>
 <span class="co"># [1]  TRUE FALSE FALSE</span></pre></div>
-<p>From your r2eng object you can access the original R expression (<code>r_expression</code>), English translation (<code>eng_expression</code>) and quoted expression (<code>quoted_expression</code>). You can also see the parse tree output via {lintr}:</p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">obj</span>$<span class="no">translation_map</span>)
+<p>Use <code>print</code> to print the R expression and English sentence.</p>
+<div class="sourceCode" id="cb6"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">obj</span>)
+<span class="co"># Original expression: hello &lt;- c(TRUE, FALSE, "banana" %in% c("apple", "orange"))</span>
+<span class="co"># English expression: hello gets a vector of open paren TRUE , FALSE , string "banana" matches a vector of open paren string "apple" , string "orange" close paren close paren</span></pre></div>
+<p>From your r2eng object you can access the original R expression (<code>r_expression</code>), English translation (<code>eng_expression</code>), quoted expression (<code>quoted_expression</code>). You can also access the parse tree output via {lintr} (<code>translation_map</code>):</p>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">obj</span>$<span class="no">translation_map</span>)
 <span class="co">#                   token  text         eng</span>
 <span class="co"># 45                 expr                  </span>
 <span class="co"># 1                SYMBOL hello       hello</span>
@@ -136,15 +140,15 @@
 <h3 class="hasAnchor">
 <a href="#further-examples" class="anchor"></a>Further examples</h3>
 <p>Here’s an example using the pipe (<code><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></code>) and two types of ‘equals’:</p>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)
-<span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu">r2eng</span>(
+<div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)
+<span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/translate.html">translate</a></span>(
   <span class="no">mtcars</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">mpg</span> <span class="kw">&gt;</span> <span class="fl">22</span>) <span class="kw">%&gt;%</span> <span class="fu">mutate</span>(<span class="kw">gear4</span> <span class="kw">=</span> <span class="no">gear</span> <span class="kw">==</span> <span class="fl">4</span>),
   <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>
 )
 <span class="co"># Original expression: mtcars %&gt;% filter(mpg &gt; 22) %&gt;% mutate(gear4 = gear == 4)</span>
 <span class="co"># English expression: mtcars then filter of open paren mpg is greater than 22 close paren then mutate of open paren gear4 = gear double equals 4 close paren</span></pre></div>
 <p>This example uses the ‘plus’ constructor from {ggplot2}:</p>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu">r2eng</span>(
+<div class="sourceCode" id="cb9"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/translate.html">translate</a></span>(
   <span class="fu">ggplot</span>(<span class="no">diamonds</span>, <span class="fu">aes</span>(<span class="kw">x</span><span class="kw">=</span><span class="no">carat</span>, <span class="kw">y</span><span class="kw">=</span><span class="no">price</span>, <span class="kw">color</span><span class="kw">=</span><span class="no">cut</span>)) + <span class="fu">geom_point</span>() + <span class="fu">geom_smooth</span>(),
   <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>
 )
@@ -152,22 +156,25 @@
 <span class="co">#  Original expression:     geom_smooth()</span>
 <span class="co"># English expression: ggplot of open paren diamonds , aes of open paren x = carat , y = price , color = cut close paren close paren plus geom_point of open paren close paren plus geom_smooth of open paren close paren</span></pre></div>
 <p>This example shows what happens when you pass vectors:</p>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu">r2eng</span>(<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>), <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span>)), <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<div class="sourceCode" id="cb10"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/translate.html">translate</a></span>(
+  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>), <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span>)),
+  <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>
+)
 <span class="co"># Original expression: plot(x = c(1, 2, 3), y = c(5, 6, 7))</span>
 <span class="co"># English expression: plot of open paren x = a vector of open paren 1 , 2 , 3 close paren , y = a vector of open paren 5 , 6 , 7 close paren close paren</span></pre></div>
 </div>
 <div id="passing-a-string" class="section level3">
 <h3 class="hasAnchor">
 <a href="#passing-a-string" class="anchor"></a>Passing a string</h3>
-<p>The <code>r2eng()</code> function understands the meaning of <code>=</code> when used for assignment versus specifying arguments, but feeding an expression such as <code>x = c(1, 2, 3)</code> would confuse <code>r2eng()</code> that you want to pass an argument <code><a href="https://rdrr.io/r/base/c.html">c(1, 2, 3)</a></code> to the parameter <code>x</code>.</p>
-<p>This is because <code>r2eng()</code> uses <a href="http://adv-r.had.co.nz/Computing-on-the-language.html">non-standard evaluation</a>.</p>
-<p>In such cases, you must use <code><a href="reference/r2eng.html">r2eng_from_string()</a></code> instead:</p>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/r2eng.html">r2eng_from_string</a></span>(<span class="st">"x = c(1, 2, 3)"</span>, <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<p>The <code><a href="reference/translate.html">translate()</a></code> function understands the meaning of <code>=</code> when used for assignment versus specifying arguments, but feeding an expression such as <code>x = c(1, 2, 3)</code> would confuse <code><a href="reference/translate.html">translate()</a></code> that you want to pass an argument <code><a href="https://rdrr.io/r/base/c.html">c(1, 2, 3)</a></code> to the parameter <code>x</code>.</p>
+<p>This is because <code><a href="reference/translate.html">translate()</a></code> uses <a href="http://adv-r.had.co.nz/Computing-on-the-language.html">non-standard evaluation</a>.</p>
+<p>In such cases, you must use <code><a href="reference/translate.html">translate_string()</a></code> instead:</p>
+<div class="sourceCode" id="cb11"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/translate.html">translate_string</a></span>(<span class="st">"x = c(1, 2, 3)"</span>, <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="co"># Original expression: x = c(1, 2, 3)</span>
 <span class="co"># English expression: x gets a vector of open paren 1 , 2 , 3 close paren</span></pre></div>
-<p>Another exceptional case for <code><a href="reference/r2eng.html">r2eng_from_string()</a></code> is when piping and expression:</p>
-<div class="sourceCode" id="cb11"><pre class="r"><span class="st">"non_english &lt;- c('ceci n est pas une pipe', 'Ich bin ein Berliner', '我其實唔識講廣東話')"</span> <span class="kw">%&gt;%</span>
-  <span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/r2eng.html">r2eng_from_string</a></span>(<span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<p>Another exceptional case for <code><a href="reference/translate.html">translate_string()</a></code> is when piping and expression:</p>
+<div class="sourceCode" id="cb12"><pre class="r"><span class="st">"non_english &lt;- c('ceci n est pas une pipe', 'Ich bin ein Berliner', '我其實唔識講廣東話')"</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/translate.html">translate_string</a></span>(<span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="co"># Original expression: non_english &lt;- c("ceci n est pas une pipe", "Ich bin ein Berliner", </span>
 <span class="co">#  Original expression:     "我其實唔識講廣東話")</span>
 <span class="co"># English expression: non_english gets a vector of open paren string "ceci n est pas une pipe" , string "Ich bin ein Berliner" , string "我其實唔識講廣東話" close paren</span></pre></div>
@@ -177,45 +184,15 @@
 <h2 class="hasAnchor">
 <a href="#rstudio-addin" class="anchor"></a>RStudio addin</h2>
 <p>Installing this package also installs an <a href="https://rstudio.github.io/rstudioaddins/">RStudio addin</a>.</p>
-<p>Select an R expression in the editor and then under ‘Addins’, go to ‘Vocalise R expression’ under ‘R2ENG’. The selected text will be spoken by your computer.</p>
+<p>Select an R expression in the editor and then under ‘Addins’, go to ‘Speak R Expression In English’ under ‘R2ENG’. The selected text will be spoken by your computer.</p>
 <p>You could bind this addin to a keyboard shortcut in RStudio by going to ‘Tools’, then ‘Modify Keyboard Shortcuts…’. Perhaps <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>.</p>
 <p>As with the rest of this package, vocalisation is only possible for macOS and with speakers.</p>
+<p>Another Addin function is also available, ‘Print R Expression In English’, which prints a selected R expression and its English translation</p>
 </div>
-<div id="work-in-progress-wip" class="section level2">
+<div id="contributions-and-code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
-<a href="#work-in-progress-wip" class="anchor"></a>Work in progress (WIP)</h2>
-<p>There is much to do.</p>
-<ul>
-<li>
-<input type="checkbox" disabled>
-Expand the dictionary</li>
-<li>
-<input type="checkbox" disabled checked>
-Split out parentheses for evaluation</li>
-<li>
-<input type="checkbox" disabled>
-Ensure multi-line translation</li>
-<li>
-<input type="checkbox" disabled checked>
-Smart check of expression structure (e.g. ‘=’ will be used as gets if used for assignment, but will be ‘is’ elsewhere)</li>
-<li>
-<input type="checkbox" disabled>
-Allow for variant opinions on translations</li>
-<li>
-<input type="checkbox" disabled>
-Account for dialects (dollar, formula, tidyverse, etc, notation)</li>
-<li>
-<input type="checkbox" disabled>
-Test!</li>
-<li>
-<input type="checkbox" disabled>
-Add documentation (vignettes, {pkgdown} site)</li>
-</ul>
-</div>
-<div id="code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
-<p>Contributions are welcome from everyone.</p>
+<a href="#contributions-and-code-of-conduct" class="anchor"></a>Contributions and Code of Conduct</h2>
+<p>Contributions are welcome from everyone. Please first <a href="https://github.com/matt-dray/r2eng/issues">add an issue</a> if a relevant one one doesn’t already exist.</p>
 <p>Please note that the {r2eng} project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
