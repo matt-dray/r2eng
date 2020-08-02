@@ -76,7 +76,7 @@
 <a href="#r2eng" class="anchor"></a>{r2eng}</h1></div>
 <p>ɑː ˈtuː /eng/</p>
 <!-- badges: start -->
-<p><a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a> <!-- badges: end --></p>
+<p><a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a> <a href="https://github.com/matt-dray/r2eng/actions"><img src="https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <!-- badges: end --></p>
 <p>Make R speakable!</p>
 <p>The goal of {r2eng} (as in ‘R to English’) is to take an R expression and ‘translate’ it to an English sentence.</p>
 <p>The package is intended to:</p>
@@ -119,17 +119,17 @@
 <p>Use <code>speak</code> to speak the English sentence.</p>
 <div class="sourceCode" id="cb4"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/speak.html">speak</a></span>(<span class="no">obj</span>)</pre></div>
 <p>Use <code>evaluate</code> to evaluate the expression.</p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/evaluate.html">evaluate</a></span>(<span class="no">obj</span>)
+<div class="sourceCode" id="cb5"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/evaluate.html">evaluate</a></span>(<span class="no">obj</span>, <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="no">hello</span>
 <span class="co"># [1]  TRUE FALSE FALSE</span></pre></div>
 <p>From your r2eng object you can access the original R expression (<code>r_expression</code>), English translation (<code>eng_expression</code>) and quoted expression (<code>quoted_expression</code>). You can also see the parse tree output via {lintr}:</p>
 <div class="sourceCode" id="cb6"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">obj</span>$<span class="no">translation_map</span>)
 <span class="co">#                   token  text         eng</span>
-<span class="co"># 40                 expr                  </span>
+<span class="co"># 45                 expr                  </span>
 <span class="co"># 1                SYMBOL hello       hello</span>
 <span class="co"># 3                  expr                  </span>
 <span class="co"># 2           LEFT_ASSIGN    &lt;-        gets</span>
-<span class="co"># 38                 expr                  </span>
+<span class="co"># 43                 expr                  </span>
 <span class="co"># 4  SYMBOL_FUNCTION_CALL     c a vector of</span></pre></div>
 </div>
 <div id="further-examples" class="section level3">
@@ -167,7 +167,7 @@
 <span class="co"># English expression: x gets a vector of open paren 1 , 2 , 3 close paren</span></pre></div>
 <p>Another exceptional case for <code><a href="reference/r2eng.html">r2eng_from_string()</a></code> is when piping and expression:</p>
 <div class="sourceCode" id="cb11"><pre class="r"><span class="st">"non_english &lt;- c('ceci n est pas une pipe', 'Ich bin ein Berliner', '我其實唔識講廣東話')"</span> <span class="kw">%&gt;%</span>
-  <span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/r2eng.html">r2eng_from_string</a></span>(<span class="kw">speak</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+  <span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/r2eng.html">r2eng_from_string</a></span>(<span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="co"># Original expression: non_english &lt;- c("ceci n est pas une pipe", "Ich bin ein Berliner", </span>
 <span class="co">#  Original expression:     "我其實唔識講廣東話")</span>
 <span class="co"># English expression: non_english gets a vector of open paren string "ceci n est pas une pipe" , string "Ich bin ein Berliner" , string "我其實唔識講廣東話" close paren</span></pre></div>
@@ -187,21 +187,29 @@
 <p>There is much to do.</p>
 <ul>
 <li>
-<br><span class="math display"></span><br> Expand the dictionary</li>
+<input type="checkbox" disabled>
+Expand the dictionary</li>
 <li>
-<br><span class="math display"><em>X</em></span><br> Split out parentheses for evaluation</li>
+<input type="checkbox" disabled checked>
+Split out parentheses for evaluation</li>
 <li>
-<br><span class="math display"></span><br> Ensure multi-line translation</li>
+<input type="checkbox" disabled>
+Ensure multi-line translation</li>
 <li>
-<br><span class="math display"><em>X</em></span><br> Smart check of expression structure (e.g. ‘=’ will be used as gets if used for assignment, but will be ‘is’ elsewhere)</li>
+<input type="checkbox" disabled checked>
+Smart check of expression structure (e.g. ‘=’ will be used as gets if used for assignment, but will be ‘is’ elsewhere)</li>
 <li>
-<br><span class="math display"></span><br> Allow for variant opinions on translations</li>
+<input type="checkbox" disabled>
+Allow for variant opinions on translations</li>
 <li>
-<br><span class="math display"></span><br> Account for dialects (dollar, formula, tidyverse, etc, notation)</li>
+<input type="checkbox" disabled>
+Account for dialects (dollar, formula, tidyverse, etc, notation)</li>
 <li>
-<br><span class="math display"></span><br> Test!</li>
+<input type="checkbox" disabled>
+Test!</li>
 <li>
-<br><span class="math display"></span><br> Add documentation (vignettes, {pkgdown} site)</li>
+<input type="checkbox" disabled>
+Add documentation (vignettes, {pkgdown} site)</li>
 </ul>
 </div>
 <div id="code-of-conduct" class="section level2">
