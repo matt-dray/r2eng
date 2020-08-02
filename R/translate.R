@@ -96,13 +96,13 @@ speak.r2eng <- function(r2eng, ...) {
 #' Print r2eng Object For Reading
 #'
 #' Print the r2eng object to see the original and translated expressions.
-#' @param r2eng object to print
+#' @param x An r2eng object to print
 #' @param ... Other arguments to pass
 #' @return Nothing
 #' @export
-read.r2eng <- function(r2eng, ...) {
-    cat(paste0("Original expression: ", r2eng$r_expression, "\n"))
-    cat(paste0("English expression:", r2eng$eng_expression, "\n"))
+print.r2eng <- function(x, ...) {
+    cat(paste0("Original expression: ", x$r_expression, "\n"))
+    cat(paste0("English expression:", x$eng_expression, "\n"))
 }
 
 .convert_expr_tree <- function(expression) {
