@@ -7,12 +7,12 @@
 \method{print}{r2eng}(x, ...)
 }
 \arguments{
-\item{x}{An r2eng object to print}
+\item{x}{An r2eng object to print.}
 
-\item{...}{Other arguments to pass}
+\item{...}{Other arguments to pass.}
 }
 \value{
-Nothing
+Nothing.
 }
 \description{
 Print the r2eng object to see the original and translated expressions.

@@ -10,14 +10,15 @@ evaluate(r2eng, ...)
 \method{evaluate}{r2eng}(r2eng, envir = parent.frame(), ...)
 }
 \arguments{
-\item{r2eng}{r2eng object to evaluate}
+\item{r2eng}{An r2eng object to evaluate.}
 
-\item{...}{Other arguments to pass}
+\item{...}{Other arguments to pass.}
 
-\item{envir}{environment to evaluate the expression, default to current environment}
+\item{envir}{Environment to evaluate the expression. Defaults to current
+environment.}
 }
 \value{
-Nothing
+Nothing.
 }
 \description{
 This function evaluates the expression of the r2eng object.

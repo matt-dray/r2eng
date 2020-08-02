@@ -10,17 +10,20 @@ translate_string(expression, speak = TRUE, function_call_end = "of ")
 translate(expression, speak = TRUE, function_call_end = "of ")
 }
 \arguments{
-\item{expression}{An R expression}
+\item{expression}{An R expression (bare if \code{translate()}, quoted if
+\code{translate_string()}).}
 
-\item{speak}{Do you want your system to try and say the English expression?
-Requires speakers on your machine.}
+\item{speak}{Logical. Do you want your system to try and say the English
+expression? macOS only. Requires speakers on your machine.}
 
-\item{function_call_end}{character, what should be added after a function call, e.g. setting this parameter to "of", this function translates summary(x) to "summrary of x open paren x close paren".}
+\item{function_call_end}{Character, what should be added after a function
+call, e.g. setting this parameter to "of", this function translates
+\code{summary(x)} to "summary of x open paren x close paren".}
 }
 \value{
-An r2eng object, which is a list with three elements: the input R expression, the 'translated'
-    English expression and a data frame showing the translation of each
-    R element.
+An r2eng object, which is a list with three elements: the input
+    R expression, the 'translated' English expression and a data frame
+    showing the translation of each R element.
 }
 \description{
 Takes an R expression and converts it to English by matching recognised

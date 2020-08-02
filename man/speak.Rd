@@ -10,13 +10,14 @@ speak(r2eng, ...)
 \method{speak}{r2eng}(r2eng, ...)
 }
 \arguments{
-\item{r2eng}{r2eng object to speak}
+\item{r2eng}{An r2eng object to speak.}
 
-\item{...}{Other arguments to pass}
+\item{...}{Other arguments to pass.}
 }
 \value{
-Nothing
+Nothing.
 }
 \description{
-This function speaks the English expression of the r2eng object. Currently, only Mac is supported.
+This function speaks the English expression of the r2eng object. Currently,
+    only macOS is supported.
 }
