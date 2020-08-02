@@ -50,23 +50,23 @@ This package depends on {lintr}, {purrr} and {rlang}.
 
 ## Examples
 
-The main function in the package is `r2eng()`. It uses [non-standard
+The main function in the package is `translate()`. It uses [non-standard
 evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html), so
 you pass it a bare R expression like this:
 
 ``` r
-r2eng::r2eng(variable <- 1, speak = TRUE)
+r2eng::translate(variable <- 1, speak = TRUE)
 # Original expression: variable <- 1
 # English expression: variable gets 1
 ```
 
-Set speak to `TRUE` for a system call that will read the English
-sentence out loud.
+Set `speak = TRUE` for a system call that will read the English sentence
+out loud (macOS only).
 
 A more complex example:
 
 ``` r
-obj <- r2eng::r2eng(
+obj <- r2eng::translate(
   hello <- c(TRUE, FALSE, 'banana' %in% c('apple', 'orange')),
   speak = FALSE
 )
@@ -78,9 +78,10 @@ obj
 
 ### Methods
 
-An `r2eng` object has two methods: `speak` and `evaluate`.
+An `r2eng` object has the methods `speak` and `evaluate`.
 
-Use `speak` to speak the English sentence.
+Use `speak` to launch a system call that will vocalise the translated
+English sentence for the given R expression (macOS only).
 
 ``` r
 r2eng::speak(obj)
@@ -94,10 +95,18 @@ hello
 # [1]  TRUE FALSE FALSE
 ```
 
+Use `print` to print the R expression and English sentence.
+
+``` r
+print(obj)
+# Original expression: hello <- c(TRUE, FALSE, "banana" %in% c("apple", "orange"))
+# English expression: hello gets a vector of open paren TRUE , FALSE , string "banana" matches a vector of open paren string "apple" , string "orange" close paren close paren
+```
+
 From your r2eng object you can access the original R expression
-(`r_expression`), English translation (`eng_expression`) and quoted
-expression (`quoted_expression`). You can also see the parse tree output
-via {lintr}:
+(`r_expression`), English translation (`eng_expression`), quoted
+expression (`quoted_expression`). You can also access the parse tree
+output via {lintr} (`translation_map`):
 
 ``` r
 head(obj$translation_map)
@@ -116,7 +125,7 @@ Here’s an example using the pipe (`%>%`) and two types of ‘equals’:
 
 ``` r
 library(magrittr)
-r2eng::r2eng(
+r2eng::translate(
   mtcars %>% filter(mpg > 22) %>% mutate(gear4 = gear == 4),
   speak = FALSE
 )
@@ -127,7 +136,7 @@ r2eng::r2eng(
 This example uses the ‘plus’ constructor from {ggplot2}:
 
 ``` r
-r2eng::r2eng(
+r2eng::translate(
   ggplot(diamonds, aes(x=carat, y=price, color=cut)) + geom_point() + geom_smooth(),
   speak = FALSE
 )
@@ -139,35 +148,38 @@ r2eng::r2eng(
 This example shows what happens when you pass vectors:
 
 ``` r
-r2eng::r2eng(plot(x = c(1, 2, 3), y = c(5, 6, 7)), speak = FALSE)
+r2eng::translate(
+  plot(x = c(1, 2, 3), y = c(5, 6, 7)),
+  speak = FALSE
+)
 # Original expression: plot(x = c(1, 2, 3), y = c(5, 6, 7))
 # English expression: plot of open paren x = a vector of open paren 1 , 2 , 3 close paren , y = a vector of open paren 5 , 6 , 7 close paren close paren
 ```
 
 ### Passing a string
 
-The `r2eng()` function understands the meaning of `=` when used for
+The `translate()` function understands the meaning of `=` when used for
 assignment versus specifying arguments, but feeding an expression such
-as `x = c(1, 2, 3)` would confuse `r2eng()` that you want to pass an
+as `x = c(1, 2, 3)` would confuse `translate()` that you want to pass an
 argument `c(1, 2, 3)` to the parameter `x`.
 
-This is because `r2eng()` uses [non-standard
+This is because `translate()` uses [non-standard
 evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html).
 
-In such cases, you must use `r2eng_from_string()` instead:
+In such cases, you must use `translate_string()` instead:
 
 ``` r
-r2eng::r2eng_from_string("x = c(1, 2, 3)", speak = FALSE)
+r2eng::translate_string("x = c(1, 2, 3)", speak = FALSE)
 # Original expression: x = c(1, 2, 3)
 # English expression: x gets a vector of open paren 1 , 2 , 3 close paren
 ```
 
-Another exceptional case for `r2eng_from_string()` is when piping and
+Another exceptional case for `translate_string()` is when piping and
 expression:
 
 ``` r
 "non_english <- c('ceci n est pas une pipe', 'Ich bin ein Berliner', '我其實唔識講廣東話')" %>% 
-  r2eng::r2eng_from_string(speak = FALSE)
+  r2eng::translate_string(speak = FALSE)
 # Original expression: non_english <- c("ceci n est pas une pipe", "Ich bin ein Berliner", 
 #  Original expression:     "我其實唔識講廣東話")
 # English expression: non_english gets a vector of open paren string "ceci n est pas une pipe" , string "Ich bin ein Berliner" , string "我其實唔識講廣東話" close paren
@@ -179,8 +191,8 @@ Installing this package also installs an [RStudio
 addin](https://rstudio.github.io/rstudioaddins/).
 
 Select an R expression in the editor and then under ‘Addins’, go to
-‘Vocalise R expression’ under ‘R2ENG’. The selected text will be
-spoken by your computer.
+‘Speak R Expression In English’ under ‘R2ENG’. The selected text will
+be spoken by your computer.
 
 You could bind this addin to a keyboard shortcut in RStudio by going to
 ‘Tools’, then ‘Modify Keyboard Shortcuts…’. Perhaps <kbd>Cmd</kbd> +
@@ -189,23 +201,15 @@ You could bind this addin to a keyboard shortcut in RStudio by going to
 As with the rest of this package, vocalisation is only possible for
 macOS and with speakers.
 
-## Work in progress (WIP)
+Another Addin function is also available, ‘Print R Expression In
+English’, which prints a selected R expression and its English
+translation
 
-There is much to do.
+## Contributions and Code of Conduct
 
-  - [ ] Expand the dictionary
-  - [x] Split out parentheses for evaluation
-  - [ ] Ensure multi-line translation
-  - [x] Smart check of expression structure (e.g. ‘=’ will be used as
-    gets if used for assignment, but will be ‘is’ elsewhere)
-  - [ ] Allow for variant opinions on translations
-  - [ ] Account for dialects (dollar, formula, tidyverse, etc, notation)
-  - [ ] Test\!
-  - [ ] Add documentation (vignettes, {pkgdown} site)
-
-## Code of Conduct
-
-Contributions are welcome from everyone.
+Contributions are welcome from everyone. Please first [add an
+issue](https://github.com/matt-dray/r2eng/issues) if a relevant one one
+doesn’t already exist.
 
 Please note that the {r2eng} project is released with a [Contributor
 Code of

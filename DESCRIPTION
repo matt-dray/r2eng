@@ -1,5 +1,5 @@
 Package: r2eng
-Version: 0.0.0.9004
+Version: 0.0.0.9005
 Type: Package
 Title: Translate R Code To An English Sentence
 Description: Take an R expression and convert it to English by matching
@@ -20,6 +20,8 @@ Depends:
 Imports:
     lintr (>= 2.0.1),
     purrr (>= 0.3.4),
-    rlang (>= 0.4.7)
+    rlang (>= 0.4.7),
+    utils
 Suggests: 
-    testthat
+    rstudioapi (>= 0.11),
+    testthat (>= 2.3.2)

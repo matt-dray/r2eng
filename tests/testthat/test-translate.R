@@ -1,5 +1,5 @@
-out_bare <- r2eng(x <- 1, speak = FALSE)
-out_str <- r2eng("x <- 1", speak = FALSE)
+out_bare <- translate(x <- 1, speak = FALSE)
+out_str <- translate_string("x <- 1", speak = FALSE)
 
 test_that("translation output has correct classes", {
   expect_equal(class(out_bare), c("list", "r2eng"))
@@ -21,7 +21,7 @@ test_that("translation output elements have expected class or type", {
   expect_equal(class(out_str$r_expression), "character")
   expect_equal(class(out_str$eng_expression), "character")
   expect_equal(class(out_str$translation_map), "data.frame")
-  expect_equal(class(out_str$quoted_expression), "character")
+  expect_equal(typeof(out_str$quoted_expression), "language")
 
 })
 

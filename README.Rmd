@@ -18,9 +18,9 @@ knitr::opts_chunk$set(
 ɑː ˈtuː /eng/
 
 <!-- badges: start -->
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![R build status](https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg)](https://github.com/matt-dray/r2eng/actions)
-[![codecov](https://codecov.io/gh/matt-dray/r2eng/branch/master/graph/badge.svg)](https://codecov.io/gh/matt-dray/r2eng)
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg){target='_blank'}](https://www.repostatus.org/#wip)
+[![R build status](https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg){target='_blank'}](https://github.com/matt-dray/r2eng/actions)
+[![codecov](https://codecov.io/gh/matt-dray/r2eng/branch/master/graph/badge.svg){target='_blank'}](https://codecov.io/gh/matt-dray/r2eng)
 <!-- badges: end -->
 
 Make R speakable!
@@ -34,9 +34,9 @@ The package is intended to:
 * provide an extra audio evaluation tool for users who are blind or have low vision
 * be of interest to any R user that's curious about how R expressions might be vocalised
 
-The project was inspired by [Amelia McNamara](https://twitter.com/AmeliaMN)'s useR! 2020 talk called 'Speaking R' ([YouTube](https://www.youtube.com/watch?v=ckW9sSdIVAc), [slides](https://www.amelia.mn/SpeakingR/#1)).
+The project was inspired by [Amelia McNamara](https://twitter.com/AmeliaMN){target='_blank'}'s useR! 2020 talk called 'Speaking R' ([YouTube](https://www.youtube.com/watch?v=ckW9sSdIVAc){target='_blank'}, [slides](https://www.amelia.mn/SpeakingR/#1){target='_blank'}).
 
-This project is a work in progress and highly opinionated. Contributions are welcome, but please see the [Code of Conduct](#conduct).
+This project is a work in progress and highly opinionated. Contributions are welcome, but please see the [Code of Conduct](#conduct){target='_blank'}.
 
 ## Installation
 
@@ -50,18 +50,18 @@ This package depends on {lintr}, {purrr} and {rlang}.
 
 ## Examples
 
-The main function in the package is `r2eng()`. It uses [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html), so you pass it a bare R expression like this:
+The main function in the package is `translate()`. It uses [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html){target='_blank'}, so you pass it a bare R expression like this:
 
-```{r example}
-r2eng::r2eng(variable <- 1, speak = TRUE)
+```{r example-basic}
+r2eng::translate(variable <- 1, speak = TRUE)
 ```
 
-Set speak to `TRUE` for a system call that will read the English sentence out loud.
+Set `speak = TRUE` for a system call that will read the English sentence out loud (macOS only).
 
 A more complex example:
 
-```{r example2}
-obj <- r2eng::r2eng(
+```{r example-complex}
+obj <- r2eng::translate(
   hello <- c(TRUE, FALSE, 'banana' %in% c('apple', 'orange')),
   speak = FALSE
 )
@@ -71,24 +71,30 @@ obj
 
 ### Methods
 
-An `r2eng` object has two methods: `speak` and `evaluate`.
+An `r2eng` object has the methods `speak` and `evaluate`.
 
-Use `speak` to speak the English sentence.
+Use `speak` to launch a system call that will vocalise the translated English sentence for the given R expression (macOS only).
 
-```{r example3}
+```{r example-speak}
 r2eng::speak(obj)
 ```
 
 Use `evaluate` to evaluate the expression.
 
-```{r example3eval}
+```{r example-eval}
 r2eng::evaluate(obj, speak = FALSE)
 hello
 ```
 
-From your r2eng object you can access the original R expression (`r_expression`), English translation (`eng_expression`) and quoted expression (`quoted_expression`). You can also see the parse tree output via {lintr}:
+Use `print` to print the R expression and English sentence.
 
-```{r map}
+```{r example-print}
+print(obj)
+```
+
+From your r2eng object you can access the original R expression (`r_expression`), English translation (`eng_expression`), quoted expression (`quoted_expression`). You can also access the parse tree output via {lintr} (`translation_map`):
+
+```{r example-map}
 head(obj$translation_map)
 ```
 
@@ -96,9 +102,9 @@ head(obj$translation_map)
 
 Here's an example using the pipe (`%>%`) and two types of 'equals':
 
-```{r example4}
+```{r example-pipe-equals}
 library(magrittr)
-r2eng::r2eng(
+r2eng::translate(
   mtcars %>% filter(mpg > 22) %>% mutate(gear4 = gear == 4),
   speak = FALSE
 )
@@ -106,8 +112,8 @@ r2eng::r2eng(
 
 This example uses the 'plus' constructor from {ggplot2}:
 
-```{r example5}
-r2eng::r2eng(
+```{r example-ggplot}
+r2eng::translate(
   ggplot(diamonds, aes(x=carat, y=price, color=cut)) + geom_point() + geom_smooth(),
   speak = FALSE
 )
@@ -115,54 +121,46 @@ r2eng::r2eng(
 
 This example shows what happens when you pass vectors:
 
-```{r example6}
-r2eng::r2eng(plot(x = c(1, 2, 3), y = c(5, 6, 7)), speak = FALSE)
+```{r example-vectors}
+r2eng::translate(
+  plot(x = c(1, 2, 3), y = c(5, 6, 7)),
+  speak = FALSE
+)
 ```
 
 ### Passing a string
 
-The `r2eng()` function understands the meaning of `=` when used for assignment versus specifying arguments, but feeding an expression such as `x = c(1, 2, 3)` would confuse `r2eng()` that you want to pass an argument `c(1, 2, 3)` to the parameter `x`. 
+The `translate()` function understands the meaning of `=` when used for assignment versus specifying arguments, but feeding an expression such as `x = c(1, 2, 3)` would confuse `translate()` that you want to pass an argument `c(1, 2, 3)` to the parameter `x`. 
 
-This is because `r2eng()` uses [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html). 
+This is because `translate()` uses [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html){target='_blank'}. 
 
-In such cases, you must use `r2eng_from_string()` instead:
+In such cases, you must use `translate_string()` instead:
 
-```{r example7}
-r2eng::r2eng_from_string("x = c(1, 2, 3)", speak = FALSE)
+```{r example-basic-string}
+r2eng::translate_string("x = c(1, 2, 3)", speak = FALSE)
 ```
 
-Another exceptional case for `r2eng_from_string()` is when piping and expression:
+Another exceptional case for `translate_string()` is when piping and expression:
 
-```{r pipe}
+```{r example-string-pipe}
 "non_english <- c('ceci n est pas une pipe', 'Ich bin ein Berliner', '我其實唔識講廣東話')" %>% 
-  r2eng::r2eng_from_string(speak = FALSE)
+  r2eng::translate_string(speak = FALSE)
 ```
 
 ## RStudio addin
 
-Installing this package also installs an [RStudio addin](https://rstudio.github.io/rstudioaddins/).
+Installing this package also installs an [RStudio addin](https://rstudio.github.io/rstudioaddins/){target='_blank'}.
 
-Select an R expression in the editor and then under 'Addins', go to 'Vocalise R expression' under 'R2ENG'. The selected text will be spoken by your computer. 
+Select an R expression in the editor and then under 'Addins', go to 'Speak R Expression In English' under 'R2ENG'. The selected text will be spoken by your computer. 
 
 You could bind this addin to a keyboard shortcut in RStudio by going to 'Tools', then 'Modify Keyboard Shortcuts...'. Perhaps <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>.
 
 As with the rest of this package, vocalisation is only possible for macOS and with speakers.
 
-## Work in progress (WIP)
+Another Addin function is also available, 'Print R Expression In English', which prints a selected R expression and its English translation
 
-There is much to do.
+## Contributions and Code of Conduct {#conduct}
 
-- [ ] Expand the dictionary
-- [X] Split out parentheses for evaluation
-- [ ] Ensure multi-line translation
-- [X] Smart check of expression structure (e.g. '=' will be used as gets if used for assignment, but will be 'is' elsewhere)
-- [ ] Allow for variant opinions on translations
-- [ ] Account for dialects (dollar, formula, tidyverse, etc, notation)
-- [ ] Test!
-- [ ] Add documentation (vignettes, {pkgdown} site)
+Contributions are welcome from everyone. Please first [add an issue](https://github.com/matt-dray/r2eng/issues){target='_blank'} if a relevant one one doesn't already exist.
 
-## Code of Conduct {#conduct}
-
-Contributions are welcome from everyone.
-
-Please note that the {r2eng} project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that the {r2eng} project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html){target='_blank'}. By contributing to this project, you agree to abide by its terms.

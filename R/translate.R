@@ -1,62 +1,86 @@
-#' @rdname r2eng
+#' @rdname translate
 #' @export
-r2eng_from_string <- function(expression, speak = TRUE, function_call_end = "of ") {
-  .convert_quoted_expression(rlang::parse_expr(expression), speak = speak, function_call_end = function_call_end)
+translate_string <- function(
+  expression, speak = TRUE, function_call_end = "of "
+) {
+  .convert_quoted_expression(
+    rlang::parse_expr(expression),
+    speak = speak, function_call_end = function_call_end
+  )
 }
 
-
-#' Convert R Code To Spoken English
+#' Translate R Code To Spoken English
 #'
 #' Takes an R expression and converts it to English by matching recognised
 #' symbols with an opinionated list of English 'translations'.
 #'
-#' @param expression An R expression
-#' @param speak Do you want your system to try and say the English expression?
-#'     Requires speakers on your machine.
-#' @param function_call_end character, what should be added after a function call, e.g. setting this parameter to "of", this function translates summary(x) to "summrary of x open paren x close paren".
-#' @return An r2eng object, which is a list with three elements: the input R expression, the 'translated'
-#'     English expression and a data frame showing the translation of each
-#'     R element.
-#'
+#' @param expression An R expression (bare if \code{translate()}, quoted if
+#'     \code{translate_string()}).
+#' @param speak Logical. Do you want your system to try and say the English
+#'     expression? macOS only. Requires speakers on your machine.
+#' @param function_call_end Character, what should be added after a function
+#'     call, e.g. setting this parameter to "of", this function translates
+#'     \code{summary(x)} to "summary of x open paren x close paren".
+#' @return An r2eng object, which is a list with three elements: the input
+#'     R expression, the 'translated' English expression and a data frame
+#'     showing the translation of each R element.
 #' @export
-#'
 #' @examples
 #' \dontrun{
-#' r2eng(variable <- 1)
+#' translate(variable <- 1)
 #' }
-r2eng <- function(expression, speak = TRUE, function_call_end = "of ") {
+translate <- function(expression, speak = TRUE, function_call_end = "of ") {
   quoted_expression <- substitute(expression)
-  # Basic input check for speak argument
   if (!is.logical(speak)) {
     stop("The 'speak' argument must be TRUE or FALSE.\n")
   }
-  return(.convert_quoted_expression(quoted_expression, speak = speak, function_call_end = function_call_end))
+  return(.convert_quoted_expression(
+    quoted_expression, speak = speak, function_call_end = function_call_end)
+  )
 }
 
-.convert_quoted_expression <- function(quoted_expression, speak = TRUE, function_call_end = "of ") {
+.convert_quoted_expression <- function(
+  quoted_expression, speak = TRUE, function_call_end = "of "
+) {
+
   trees <- .convert_expr_tree(deparse(quoted_expression))
-  eng_vec <- purrr::map2_chr(trees$token, trees$text, .translate, function_call_end = function_call_end)
+
+  eng_vec <- purrr::map2_chr(
+    trees$token,
+    trees$text,
+    .translate,
+    function_call_end = function_call_end
+  )
+
   eng_expression <- gsub(" +", " ", paste0(eng_vec, collapse = " "))
+
   trees$eng <- eng_vec
+
   # Output a list of results
   results <- list(
-    r_expression = deparse(quoted_expression),  # original R expression as string
-    eng_expression = eng_expression,  # tranlsated English expression
+    r_expression = deparse(quoted_expression),  # R expression as string
+    eng_expression = eng_expression,  # translated English expression
     translation_map = trees,  # table mapping R to English
     quoted_expression = quoted_expression
   )
+
   class(results) <- append(class(results), "r2eng")
+
   if (speak) {
       speak(results)
   }
+
   return(results)
+
 }
 
 #' Speak out the English expression of r2eng object
 #'
-#' This function speaks the English expression of the r2eng object. Currently, only Mac is supported.
-#' @param r2eng r2eng object to speak
-#' @return Nothing
+#' This function speaks the English expression of the r2eng object. Currently,
+#'     only macOS is supported.
+#' @param r2eng An r2eng object to speak.
+#' @param ... Other arguments to pass.
+#' @return Nothing.
 #' @export
 speak <- function(r2eng, ...) {
     UseMethod("speak", r2eng)
@@ -65,9 +89,11 @@ speak <- function(r2eng, ...) {
 #' Evaluate expression in r2eng object
 #'
 #' This function evaluates the expression of the r2eng object.
-#' @param r2eng r2eng object to evaluate
-#' @param envir environment to evaluate the expression, default to current environment
-#' @return Nothing
+#' @param r2eng An r2eng object to evaluate.
+#' @param envir Environment to evaluate the expression. Defaults to current
+#'     environment.
+#' @param ... Other arguments to pass.
+#' @return Nothing.
 #' @export
 evaluate <- function(r2eng, ...) {
     UseMethod("evaluate", r2eng)
@@ -82,18 +108,25 @@ evaluate.r2eng <- function(r2eng, envir = parent.frame(), ...) {
 #' @rdname speak
 #' @export
 speak.r2eng <- function(r2eng, ...) {
-    system(paste0("say '", paste0(tail(r2eng$translation_map$eng, -1), collapse = ","), "'"))
+  system(
+    paste0(
+      "say '",
+      paste0(utils::tail(r2eng$translation_map$eng, -1), collapse = ","),
+      "'"
+    )
+  )
 }
 
-#' Print r2eng object
+#' Print r2eng Object For Reading
 #'
-#' Print out the r2eng object.
-#' @param r2eng object to print
-#' @return Nothing
+#' Print the r2eng object to see the original and translated expressions.
+#' @param x An r2eng object to print.
+#' @param ... Other arguments to pass.
+#' @return Nothing.
 #' @export
-print.r2eng <- function(r2eng, ...) {
-    cat(paste0("Original expression: ", r2eng$r_expression, "\n"))
-    cat(paste0("English expression:", r2eng$eng_expression, "\n"))
+print.r2eng <- function(x, ...) {
+    cat(paste0("Original expression: ", x$r_expression, "\n"))
+    cat(paste0("English expression:", x$eng_expression, "\n"))
 }
 
 .convert_expr_tree <- function(expression) {
@@ -108,7 +141,6 @@ print.r2eng <- function(r2eng, ...) {
 .translate <- function(token, text, function_call = "", function_call_end = "") {
 
   # Arithmetic/conditions
-
   if (token == "'+'") {
     return("plus")
   }
@@ -159,7 +191,6 @@ print.r2eng <- function(r2eng, ...) {
   }
 
   # Braces
-
   if (token == "'('") {
     return("open paren")
   }
@@ -183,7 +214,6 @@ print.r2eng <- function(r2eng, ...) {
   }
 
   # Assignment
-
   if (token == "LEFT_ASSIGN" | token == "EQ_ASSIGN") {
     return("gets")
   }
@@ -192,7 +222,6 @@ print.r2eng <- function(r2eng, ...) {
   }
 
   # Infix operators
-
   if (token == "SPECIAL" & text == "%in%") {
     return("matches")
   }
@@ -201,7 +230,6 @@ print.r2eng <- function(r2eng, ...) {
   }
 
   # Functions
-
   if (token == "SYMBOL_FUNCTION_CALL") {
     if (text == "c") {
       return("a vector of")
@@ -216,13 +244,11 @@ print.r2eng <- function(r2eng, ...) {
   }
 
   # Help
-
   if (token == "'?'") {
     return("help for")
   }
 
   # Namespace
-
   if (token == "NS_GET") {  # '::'
     return("double-colon")
   }
@@ -231,7 +257,6 @@ print.r2eng <- function(r2eng, ...) {
   }
 
   # Unnamed tokens
-
   if (grepl("SYMBOL", token)) {
     return(text)
   }

@@ -2,16 +2,18 @@
 % Please edit documentation in R/translate.R
 \name{print.r2eng}
 \alias{print.r2eng}
-\title{Print r2eng object}
+\title{Print r2eng Object For Reading}
 \usage{
-\method{print}{r2eng}(r2eng, ...)
+\method{print}{r2eng}(x, ...)
 }
 \arguments{
-\item{r2eng}{object to print}
+\item{x}{An r2eng object to print.}
+
+\item{...}{Other arguments to pass.}
 }
 \value{
-Nothing
+Nothing.
 }
 \description{
-Print out the r2eng object.
+Print the r2eng object to see the original and translated expressions.
 }
