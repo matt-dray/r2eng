@@ -82,7 +82,13 @@ evaluate.r2eng <- function(r2eng, envir = parent.frame(), ...) {
 #' @rdname speak
 #' @export
 speak.r2eng <- function(r2eng, ...) {
-    system(paste0("say '", paste0(tail(r2eng$translation_map$eng, -1), collapse = ","), "'"))
+  system(
+    paste0(
+      "say '",
+      paste0(utils::tail(r2eng$translation_map$eng, -1), collapse = ","),
+      "'"
+    )
+  )
 }
 
 #' Print r2eng object

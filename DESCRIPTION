@@ -20,6 +20,7 @@ Depends:
 Imports:
     lintr (>= 2.0.1),
     purrr (>= 0.3.4),
-    rlang (>= 0.4.7)
+    rlang (>= 0.4.7),
+    utils (>= 4.0.2)
 Suggests: 
     testthat
