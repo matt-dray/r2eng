@@ -2,10 +2,10 @@
 % Please edit documentation in R/addin.R
 \name{r2eng_vocalise}
 \alias{r2eng_vocalise}
-\title{Vocalise R Expression}
+\title{Vocalise An R Expression}
 \usage{
 r2eng_vocalise()
 }
 \description{
-Vocalise selected R expression aloud in English (one line only).
+Vocalise selected R expression aloud in English (macOS only).
 }
