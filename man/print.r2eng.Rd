@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{r2eng}{object to print}
+
+\item{...}{Other arguments to pass}
 }
 \value{
 Nothing

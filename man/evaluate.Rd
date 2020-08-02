@@ -12,6 +12,8 @@ evaluate(r2eng, ...)
 \arguments{
 \item{r2eng}{r2eng object to evaluate}
 
+\item{...}{Other arguments to pass}
+
 \item{envir}{environment to evaluate the expression, default to current environment}
 }
 \value{

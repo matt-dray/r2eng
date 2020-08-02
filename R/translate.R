@@ -56,6 +56,7 @@ r2eng <- function(expression, speak = TRUE, function_call_end = "of ") {
 #'
 #' This function speaks the English expression of the r2eng object. Currently, only Mac is supported.
 #' @param r2eng r2eng object to speak
+#' @param ... Other arguments to pass
 #' @return Nothing
 #' @export
 speak <- function(r2eng, ...) {
@@ -67,6 +68,7 @@ speak <- function(r2eng, ...) {
 #' This function evaluates the expression of the r2eng object.
 #' @param r2eng r2eng object to evaluate
 #' @param envir environment to evaluate the expression, default to current environment
+#' @param ... Other arguments to pass
 #' @return Nothing
 #' @export
 evaluate <- function(r2eng, ...) {
@@ -95,6 +97,7 @@ speak.r2eng <- function(r2eng, ...) {
 #'
 #' Print out the r2eng object.
 #' @param r2eng object to print
+#' @param ... Other arguments to pass
 #' @return Nothing
 #' @export
 print.r2eng <- function(r2eng, ...) {

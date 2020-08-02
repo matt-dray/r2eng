@@ -23,4 +23,5 @@ Imports:
     rlang (>= 0.4.7),
     utils (>= 4.0.2)
 Suggests: 
-    testthat
+    rstudioapi (>= 0.11),
+    testthat (>= 2.3.2)

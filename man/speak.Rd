@@ -11,6 +11,8 @@ speak(r2eng, ...)
 }
 \arguments{
 \item{r2eng}{r2eng object to speak}
+
+\item{...}{Other arguments to pass}
 }
 \value{
 Nothing
