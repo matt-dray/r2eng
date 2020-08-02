@@ -12,6 +12,7 @@ has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![R build
 status](https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg)](https://github.com/matt-dray/r2eng/actions)
+[![codecov](https://codecov.io/gh/matt-dray/r2eng/branch/master/graph/badge.svg)](https://codecov.io/gh/matt-dray/r2eng)
 <!-- badges: end -->
 
 Make R speakable\!
