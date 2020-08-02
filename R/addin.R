@@ -14,7 +14,7 @@ r2eng_vocalise <- function() {
     selected_expr <- active_doc$selection[[1]]$text
 
     # Capture expression as translated r2eng object
-    obj <- r2eng_from_string(selected_expr, speak = FALSE)
+    obj <- translate_string(selected_expr, speak = FALSE)
 
     # Use the speak() method
     speak(obj)

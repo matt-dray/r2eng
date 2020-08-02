@@ -1,11 +1,11 @@
-#' @rdname r2eng
+#' @rdname translate
 #' @export
-r2eng_from_string <- function(expression, speak = TRUE, function_call_end = "of ") {
+translate_string <- function(expression, speak = TRUE, function_call_end = "of ") {
   .convert_quoted_expression(rlang::parse_expr(expression), speak = speak, function_call_end = function_call_end)
 }
 
 
-#' Convert R Code To Spoken English
+#' Translate R Code To Spoken English
 #'
 #' Takes an R expression and converts it to English by matching recognised
 #' symbols with an opinionated list of English 'translations'.
@@ -22,9 +22,9 @@ r2eng_from_string <- function(expression, speak = TRUE, function_call_end = "of 
 #'
 #' @examples
 #' \dontrun{
-#' r2eng(variable <- 1)
+#' translate(variable <- 1)
 #' }
-r2eng <- function(expression, speak = TRUE, function_call_end = "of ") {
+translate <- function(expression, speak = TRUE, function_call_end = "of ") {
   quoted_expression <- substitute(expression)
   # Basic input check for speak argument
   if (!is.logical(speak)) {
@@ -93,14 +93,14 @@ speak.r2eng <- function(r2eng, ...) {
   )
 }
 
-#' Print r2eng object
+#' Print r2eng Object For Reading
 #'
-#' Print out the r2eng object.
+#' Print the r2eng object to see the original and translated expressions.
 #' @param r2eng object to print
 #' @param ... Other arguments to pass
 #' @return Nothing
 #' @export
-print.r2eng <- function(r2eng, ...) {
+read.r2eng <- function(r2eng, ...) {
     cat(paste0("Original expression: ", r2eng$r_expression, "\n"))
     cat(paste0("English expression:", r2eng$eng_expression, "\n"))
 }
