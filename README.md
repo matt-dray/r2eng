@@ -10,6 +10,8 @@
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![R build
+status](https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg)](https://github.com/matt-dray/r2eng/actions)
 <!-- badges: end -->
 
 Make R speakable\!
@@ -86,7 +88,7 @@ r2eng::speak(obj)
 Use `evaluate` to evaluate the expression.
 
 ``` r
-r2eng::evaluate(obj)
+r2eng::evaluate(obj, speak = FALSE)
 hello
 # [1]  TRUE FALSE FALSE
 ```
@@ -99,11 +101,11 @@ via {lintr}:
 ``` r
 head(obj$translation_map)
 #                   token  text         eng
-# 40                 expr                  
+# 45                 expr                  
 # 1                SYMBOL hello       hello
 # 3                  expr                  
 # 2           LEFT_ASSIGN    <-        gets
-# 38                 expr                  
+# 43                 expr                  
 # 4  SYMBOL_FUNCTION_CALL     c a vector of
 ```
 
@@ -164,7 +166,7 @@ expression:
 
 ``` r
 "non_english <- c('ceci n est pas une pipe', 'Ich bin ein Berliner', '我其實唔識講廣東話')" %>% 
-  r2eng::r2eng_from_string(speak = TRUE)
+  r2eng::r2eng_from_string(speak = FALSE)
 # Original expression: non_english <- c("ceci n est pas une pipe", "Ich bin ein Berliner", 
 #  Original expression:     "我其實唔識講廣東話")
 # English expression: non_english gets a vector of open paren string "ceci n est pas une pipe" , string "Ich bin ein Berliner" , string "我其實唔識講廣東話" close paren
@@ -190,16 +192,15 @@ macOS and with speakers.
 
 There is much to do.
 
-  - \[ \] Expand the dictionary
-  - \[X\] Split out parentheses for evaluation
-  - \[ \] Ensure multi-line translation
-  - \[X\] Smart check of expression structure (e.g. ‘=’ will be used as
+  - [ ] Expand the dictionary
+  - [x] Split out parentheses for evaluation
+  - [ ] Ensure multi-line translation
+  - [x] Smart check of expression structure (e.g. ‘=’ will be used as
     gets if used for assignment, but will be ‘is’ elsewhere)
-  - \[ \] Allow for variant opinions on translations
-  - \[ \] Account for dialects (dollar, formula, tidyverse, etc,
-    notation)
-  - \[ \] Test\!
-  - \[ \] Add documentation (vignettes, {pkgdown} site)
+  - [ ] Allow for variant opinions on translations
+  - [ ] Account for dialects (dollar, formula, tidyverse, etc, notation)
+  - [ ] Test\!
+  - [ ] Add documentation (vignettes, {pkgdown} site)
 
 ## Code of Conduct
 

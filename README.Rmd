@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![R build status](https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg)](https://github.com/matt-dray/r2eng/actions)
 <!-- badges: end -->
 
 Make R speakable!
@@ -80,7 +81,7 @@ r2eng::speak(obj)
 Use `evaluate` to evaluate the expression.
 
 ```{r example3eval}
-r2eng::evaluate(obj)
+r2eng::evaluate(obj, speak = FALSE)
 hello
 ```
 
@@ -133,7 +134,7 @@ Another exceptional case for `r2eng_from_string()` is when piping and expression
 
 ```{r pipe}
 "non_english <- c('ceci n est pas une pipe', 'Ich bin ein Berliner', '我其實唔識講廣東話')" %>% 
-  r2eng::r2eng_from_string(speak = TRUE)
+  r2eng::r2eng_from_string(speak = FALSE)
 ```
 
 ## RStudio addin
