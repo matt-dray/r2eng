@@ -93,8 +93,3 @@ test_that("non-logicals passed to speak argument are errors", {
   expect_error(translate_string(in_str, speak = dfr))
 
 })
-
-test_that("speak method returns nothing", {
-  expect_invisible(speak(out_bare))
-  expect_silent(speak(out_str))
-})
