@@ -3,10 +3,22 @@
 translate_string <- function(
   expression, speak = TRUE, function_call_end = "of "
 ) {
+
+  if (!is.character(expression) & length(expression != 1)) {
+    stop("The 'expression' argument must be a character string.\n")
+  }
+  if (!is.logical(speak)) {
+    stop("The 'speak' argument must be TRUE or FALSE.\n")
+  }
+  if (!is.character(function_call_end) & length(function_call_end != 1)) {
+    stop("The 'function_call_end' argument must be a character string.\n")
+  }
+
   .convert_quoted_expression(
     rlang::parse_expr(expression),
     speak = speak, function_call_end = function_call_end
   )
+
 }
 
 #' Translate R Code To Spoken English
@@ -33,6 +45,9 @@ translate <- function(expression, speak = TRUE, function_call_end = "of ") {
   quoted_expression <- substitute(expression)
   if (!is.logical(speak)) {
     stop("The 'speak' argument must be TRUE or FALSE.\n")
+  }
+  if (!is.character(function_call_end) & length(function_call_end != 1)) {
+    stop("The 'function_call_end' argument must be a character string.\n")
   }
   return(.convert_quoted_expression(
     quoted_expression, speak = speak, function_call_end = function_call_end)
