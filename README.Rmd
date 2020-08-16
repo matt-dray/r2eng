@@ -4,6 +4,8 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<img src="https://raw.githubusercontent.com/matt-dray/stickers/master/output/r2eng_hex.png" width="150" align="right">
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -21,6 +23,7 @@ knitr::opts_chunk$set(
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg){target='_blank'}](https://www.repostatus.org/#wip)
 [![R build status](https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg){target='_blank'}](https://github.com/matt-dray/r2eng/actions)
 [![codecov](https://codecov.io/gh/matt-dray/r2eng/branch/master/graph/badge.svg){target='_blank'}](https://codecov.io/gh/matt-dray/r2eng)
+[![Launch Rstudio Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/matt-dray/try-r2eng/master?urlpath=rstudio)
 <!-- badges: end -->
 
 Make R speakable!

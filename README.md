@@ -1,6 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<img src="https://raw.githubusercontent.com/matt-dray/stickers/master/output/r2eng_hex.png" width="150" align="right">
+
 # {r2eng}
 
 ɑː ˈtuː /eng/
@@ -13,7 +15,8 @@ public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostat
 [![R build
 status](https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg)](https://github.com/matt-dray/r2eng/actions)
 [![codecov](https://codecov.io/gh/matt-dray/r2eng/branch/master/graph/badge.svg)](https://codecov.io/gh/matt-dray/r2eng)
-[![Launch Rstudio Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/matt-dray/try-r2eng/master?urlpath=rstudio)
+[![Launch Rstudio
+Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/matt-dray/try-r2eng/master?urlpath=rstudio)
 <!-- badges: end -->
 
 Make R speakable\!
@@ -112,11 +115,11 @@ output via {lintr} (`translation_map`):
 ``` r
 head(obj$translation_map)
 #                   token  text         eng
-# 45                 expr                  
+# 40                 expr                  
 # 1                SYMBOL hello       hello
 # 3                  expr                  
 # 2           LEFT_ASSIGN    <-        gets
-# 43                 expr                  
+# 38                 expr                  
 # 4  SYMBOL_FUNCTION_CALL     c a vector of
 ```
 
