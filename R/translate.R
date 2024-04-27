@@ -145,11 +145,9 @@ print.r2eng <- function(x, ...) {
 }
 
 .convert_expr_tree <- function(expression) {
-    tmp <- tempfile()
-    writeLines(expression, tmp)
-    trees <- lintr::get_source_expressions(tmp)
-    unlink(tmp)
-    return(trees$expressions[[1]]$parsed_content[,c("token", "text")])
+  parsed <- parse(text = expression, keep.source = TRUE)
+  parse_data <- utils::getParseData(parsed)
+  parse_data[, c("token", "text")]
 }
 
 
