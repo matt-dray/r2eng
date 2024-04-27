@@ -9,39 +9,43 @@
 
 <!-- badges: start -->
 
-[![Project Status: WIP – Initial development is in progress, but there
-has not yet been a stable, usable release suitable for the
-public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![R build
-status](https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg)](https://github.com/matt-dray/r2eng/actions)
-[![codecov](https://codecov.io/gh/matt-dray/r2eng/branch/master/graph/badge.svg)](https://codecov.io/gh/matt-dray/r2eng)
+[<img src="https://www.repostatus.org/badges/latest/wip.svg"
+target="_blank"
+alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public." />](https://www.repostatus.org/#wip)
+[<img
+src="https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg"
+target="_blank" alt="R build status" />](https://github.com/matt-dray/r2eng/actions)
+[<img
+src="https://codecov.io/gh/matt-dray/r2eng/branch/master/graph/badge.svg"
+target="_blank" alt="codecov" />](https://codecov.io/gh/matt-dray/r2eng)
 [![Launch Rstudio
 Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/matt-dray/try-r2eng/master?urlpath=rstudio)
-[![rostrum.blog post](https://img.shields.io/badge/rostrum.blog-post-008900?style=flat&labelColor=black&logo=data:image/gif;base64,R0lGODlhEAAQAPEAAAAAABWCBAAAAAAAACH5BAlkAAIAIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAAQAAAC55QkISIiEoQQQgghRBBCiCAIgiAIgiAIQiAIgSAIgiAIQiAIgRAEQiAQBAQCgUAQEAQEgYAgIAgIBAKBQBAQCAKBQEAgCAgEAoFAIAgEBAKBIBAQCAQCgUAgEAgCgUBAICAgICAgIBAgEBAgEBAgEBAgECAgICAgECAQIBAQIBAgECAgICAgICAgECAQECAQICAgICAgICAgEBAgEBAgEBAgICAgICAgECAQIBAQIBAgECAgICAgIBAgECAQECAQIBAgICAgIBAgIBAgEBAgECAgECAgICAgICAgECAgECAgQIAAAQIKAAAh+QQJZAACACwAAAAAEAAQAAAC55QkIiESIoQQQgghhAhCBCEIgiAIgiAIQiAIgSAIgiAIQiAIgRAEQiAQBAQCgUAQEAQEgYAgIAgIBAKBQBAQCAKBQEAgCAgEAoFAIAgEBAKBIBAQCAQCgUAgEAgCgUBAICAgICAgIBAgEBAgEBAgEBAgECAgICAgECAQIBAQIBAgECAgICAgICAgECAQECAQICAgICAgICAgEBAgEBAgEBAgICAgICAgECAQIBAQIBAgECAgICAgIBAgECAQECAQIBAgICAgIBAgIBAgEBAgECAgECAgICAgICAgECAgECAgQIAAAQIKAAA7)](https://www.rostrum.blog/2020/11/14/hello-r2eng/)
 <!-- badges: end -->
 
-Make R speakable\!
+Make R speakable!
 
 The goal of {r2eng} (as in ‘R to English’) is to take an R expression
 and ‘translate’ it to an English sentence.
 
 The package is intended to:
 
-  - improve communication between teachers and learners
-  - make R discussions in English more accessible to non-English
-    speakers
-  - provide an extra audio evaluation tool for users who are blind or
-    have low vision
-  - be of interest to any R user that’s curious about how R expressions
-    might be vocalised
+- improve communication between teachers and learners
+- make R discussions in English more accessible to non-English speakers
+- provide an extra audio evaluation tool for users who are blind or have
+  low vision
+- be of interest to any R user that’s curious about how R expressions
+  might be vocalised
 
-The project was inspired by [Amelia
-McNamara](https://twitter.com/AmeliaMN)‘s useR\! 2020 talk called
-’Speaking R’ ([YouTube](https://www.youtube.com/watch?v=ckW9sSdIVAc),
-[slides](https://www.amelia.mn/SpeakingR/#1)).
+The project was inspired by
+<a href="https://twitter.com/AmeliaMN" target="_blank">Amelia
+McNamara</a>‘s useR! 2020 talk called ’Speaking R’
+(<a href="https://www.youtube.com/watch?v=ckW9sSdIVAc"
+target="_blank">YouTube</a>,
+<a href="https://www.amelia.mn/SpeakingR/#1" target="_blank">slides</a>).
 
 This project is a work in progress and highly opinionated. Contributions
-are welcome, but please see the [Code of Conduct](#conduct).
+are welcome, but please see the
+<a href="#conduct" target="_blank">Code of Conduct</a>.
 
 ## Installation
 
@@ -51,13 +55,14 @@ You can install the development version of {r2eng} from GitHub with:
 remotes::install_github("matt-dray/r2eng")
 ```
 
-This package depends on {lintr}, {purrr} and {rlang}.
+This package depends on {purrr} and {rlang}.
 
 ## Examples
 
-The main function in the package is `translate()`. It uses [non-standard
-evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html), so
-you pass it a bare R expression like this:
+The main function in the package is `translate()`. It uses
+<a href="http://adv-r.had.co.nz/Computing-on-the-language.html"
+target="_blank">non-standard evaluation</a>, so you pass it a bare R
+expression like this:
 
 ``` r
 r2eng::translate(variable <- 1, speak = TRUE)
@@ -111,16 +116,16 @@ print(obj)
 From your r2eng object you can access the original R expression
 (`r_expression`), English translation (`eng_expression`), quoted
 expression (`quoted_expression`). You can also access the parse tree
-output via {lintr} (`translation_map`):
+output (`translation_map`):
 
 ``` r
 head(obj$translation_map)
 #                   token  text         eng
-# 40                 expr                  
+# 45                 expr                  
 # 1                SYMBOL hello       hello
 # 3                  expr                  
 # 2           LEFT_ASSIGN    <-        gets
-# 38                 expr                  
+# 43                 expr                  
 # 4  SYMBOL_FUNCTION_CALL     c a vector of
 ```
 
@@ -168,8 +173,9 @@ assignment versus specifying arguments, but feeding an expression such
 as `x = c(1, 2, 3)` would confuse `translate()` that you want to pass an
 argument `c(1, 2, 3)` to the parameter `x`.
 
-This is because `translate()` uses [non-standard
-evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html).
+This is because `translate()` uses
+<a href="http://adv-r.had.co.nz/Computing-on-the-language.html"
+target="_blank">non-standard evaluation</a>.
 
 In such cases, you must use `translate_string()` instead:
 
@@ -192,12 +198,13 @@ expression:
 
 ## RStudio addin
 
-Installing this package also installs an [RStudio
-addin](https://rstudio.github.io/rstudioaddins/).
+Installing this package also installs an
+<a href="https://rstudio.github.io/rstudioaddins/"
+target="_blank">RStudio addin</a>.
 
 Select an R expression in the editor and then under ‘Addins’, go to
-‘Speak R Expression In English’ under ‘R2ENG’. The selected text will
-be spoken by your computer.
+‘Speak R Expression In English’ under ‘R2ENG’. The selected text will be
+spoken by your computer.
 
 You could bind this addin to a keyboard shortcut in RStudio by going to
 ‘Tools’, then ‘Modify Keyboard Shortcuts…’. Perhaps <kbd>Cmd</kbd> +
@@ -212,11 +219,11 @@ translation
 
 ## Contributions and Code of Conduct
 
-Contributions are welcome from everyone. Please first [add an
-issue](https://github.com/matt-dray/r2eng/issues) if a relevant one one
-doesn’t already exist.
+Contributions are welcome from everyone. Please first
+<a href="https://github.com/matt-dray/r2eng/issues" target="_blank">add
+an issue</a> if a relevant one one doesn’t already exist.
 
-Please note that the {r2eng} project is released with a [Contributor
-Code of
-Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms.
+Please note that the {r2eng} project is released with a <a
+href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html"
+target="_blank">Contributor Code of Conduct</a>. By contributing to this
+project, you agree to abide by its terms.
