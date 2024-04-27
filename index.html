@@ -6,21 +6,21 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Translate R Code To An English Sentence • r2eng</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Translate R Code To An English Sentence">
-<meta property="og:description" content="Take an R expression and convert it to English by matching
-    recognised symbols with an opinionated list of English translations.
-    Inspired By Amelia McNamara's useR! 2020 conference talk.">
+<meta property="og:description" content="Take an R expression and convert it to English by matching recognised symbols with an opinionated list of English translations. Inspired By Amelia McNamara's useR! 2020 conference talk.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">r2eng</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9005</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9005</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -54,8 +48,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/matt-dray/r2eng/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/matt-dray/r2eng/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -73,12 +67,12 @@
   <div class="contents col-md-9">
 
 <p><img src="https://raw.githubusercontent.com/matt-dray/stickers/master/output/r2eng_hex.png" width="150" align="right"></p>
-<div id="r2eng" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#r2eng" class="anchor"></a>{r2eng}</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="r2eng">{r2eng}<a class="anchor" aria-label="anchor" href="#r2eng"></a>
+</h1></div>
 <p>ɑː ˈtuː /eng/</p>
 <!-- badges: start -->
-<p><a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a> <a href="https://github.com/matt-dray/r2eng/actions"><img src="https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <a href="https://codecov.io/gh/matt-dray/r2eng"><img src="https://codecov.io/gh/matt-dray/r2eng/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://mybinder.org/v2/gh/matt-dray/try-r2eng/master?urlpath=rstudio"><img src="http://mybinder.org/badge_logo.svg" alt="Launch Rstudio Binder"></a> <!-- badges: end --></p>
+
 <p>Make R speakable!</p>
 <p>The goal of {r2eng} (as in ‘R to English’) is to take an R expression and ‘translate’ it to an English sentence.</p>
 <p>The package is intended to:</p>
@@ -88,114 +82,126 @@
 <li>provide an extra audio evaluation tool for users who are blind or have low vision</li>
 <li>be of interest to any R user that’s curious about how R expressions might be vocalised</li>
 </ul>
-<p>The project was inspired by <a href="https://twitter.com/AmeliaMN">Amelia McNamara</a>‘s useR! 2020 talk called ’Speaking R’ (<a href="https://www.youtube.com/watch?v=ckW9sSdIVAc">YouTube</a>, <a href="https://www.amelia.mn/SpeakingR/#1">slides</a>).</p>
+<p>The project was inspired by <a href="https://twitter.com/AmeliaMN" class="external-link">Amelia McNamara</a>‘s useR! 2020 talk called ’Speaking R’ (<a href="https://www.youtube.com/watch?v=ckW9sSdIVAc" class="external-link">YouTube</a>, <a href="https://www.amelia.mn/SpeakingR/#1" class="external-link">slides</a>).</p>
 <p>This project is a work in progress and highly opinionated. Contributions are welcome, but please see the <a href="#conduct">Code of Conduct</a>.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>You can install the development version of {r2eng} from GitHub with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"matt-dray/r2eng"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"matt-dray/r2eng"</span><span class="op">)</span></span></code></pre></div>
 <p>This package depends on {lintr}, {purrr} and {rlang}.</p>
 </div>
-<div id="examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h2>
-<p>The main function in the package is <code><a href="reference/translate.html">translate()</a></code>. It uses <a href="http://adv-r.had.co.nz/Computing-on-the-language.html">non-standard evaluation</a>, so you pass it a bare R expression like this:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/translate.html">translate</a></span>(<span class="no">variable</span> <span class="kw">&lt;-</span> <span class="fl">1</span>, <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="co"># Original expression: variable &lt;- 1</span>
-<span class="co"># English expression: variable gets 1</span></pre></div>
+<div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
+<p>The main function in the package is <code><a href="reference/translate.html">translate()</a></code>. It uses <a href="http://adv-r.had.co.nz/Computing-on-the-language.html" class="external-link">non-standard evaluation</a>, so you pass it a bare R expression like this:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">r2eng</span><span class="fu">::</span><span class="fu"><a href="reference/translate.html">translate</a></span><span class="op">(</span><span class="va">variable</span> <span class="op">&lt;-</span> <span class="fl">1</span>, speak <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># Original expression: variable &lt;- 1</span></span>
+<span><span class="co"># English expression: variable gets 1</span></span></code></pre></div>
 <p>Set <code>speak = TRUE</code> for a system call that will read the English sentence out loud (macOS only).</p>
 <p>A more complex example:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="no">obj</span> <span class="kw">&lt;-</span> <span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/translate.html">translate</a></span>(
-  <span class="no">hello</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">TRUE</span>, <span class="fl">FALSE</span>, <span class="st">'banana'</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'apple'</span>, <span class="st">'orange'</span>)),
-  <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-)
-
-<span class="no">obj</span>
-<span class="co"># Original expression: hello &lt;- c(TRUE, FALSE, "banana" %in% c("apple", "orange"))</span>
-<span class="co"># English expression: hello gets a vector of open paren TRUE , FALSE , string "banana" matches a vector of open paren string "apple" , string "orange" close paren close paren</span></pre></div>
-<div id="methods" class="section level3">
-<h3 class="hasAnchor">
-<a href="#methods" class="anchor"></a>Methods</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">obj</span> <span class="op">&lt;-</span> <span class="fu">r2eng</span><span class="fu">::</span><span class="fu"><a href="reference/translate.html">translate</a></span><span class="op">(</span></span>
+<span>  <span class="va">hello</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="st">'banana'</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'apple'</span>, <span class="st">'orange'</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  speak <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">obj</span></span>
+<span><span class="co"># Original expression: hello &lt;- c(TRUE, FALSE, "banana" %in% c("apple", "orange"))</span></span>
+<span><span class="co"># English expression: hello gets a vector of open paren TRUE , FALSE , string "banana" matches a vector of open paren string "apple" , string "orange" close paren close paren</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a>
+</h3>
 <p>An <code>r2eng</code> object has the methods <code>speak</code> and <code>evaluate</code>.</p>
 <p>Use <code>speak</code> to launch a system call that will vocalise the translated English sentence for the given R expression (macOS only).</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/speak.html">speak</a></span>(<span class="no">obj</span>)</pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">r2eng</span><span class="fu">::</span><span class="fu"><a href="reference/speak.html">speak</a></span><span class="op">(</span><span class="va">obj</span><span class="op">)</span></span></code></pre></div>
 <p>Use <code>evaluate</code> to evaluate the expression.</p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/evaluate.html">evaluate</a></span>(<span class="no">obj</span>, <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="no">hello</span>
-<span class="co"># [1]  TRUE FALSE FALSE</span></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">r2eng</span><span class="fu">::</span><span class="fu"><a href="reference/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">obj</span>, speak <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">hello</span></span>
+<span><span class="co"># [1]  TRUE FALSE FALSE</span></span></code></pre></div>
 <p>Use <code>print</code> to print the R expression and English sentence.</p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">obj</span>)
-<span class="co"># Original expression: hello &lt;- c(TRUE, FALSE, "banana" %in% c("apple", "orange"))</span>
-<span class="co"># English expression: hello gets a vector of open paren TRUE , FALSE , string "banana" matches a vector of open paren string "apple" , string "orange" close paren close paren</span></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">obj</span><span class="op">)</span></span>
+<span><span class="co"># Original expression: hello &lt;- c(TRUE, FALSE, "banana" %in% c("apple", "orange"))</span></span>
+<span><span class="co"># English expression: hello gets a vector of open paren TRUE , FALSE , string "banana" matches a vector of open paren string "apple" , string "orange" close paren close paren</span></span></code></pre></div>
 <p>From your r2eng object you can access the original R expression (<code>r_expression</code>), English translation (<code>eng_expression</code>), quoted expression (<code>quoted_expression</code>). You can also access the parse tree output via {lintr} (<code>translation_map</code>):</p>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">obj</span>$<span class="no">translation_map</span>)
-<span class="co">#                   token  text         eng</span>
-<span class="co"># 40                 expr                  </span>
-<span class="co"># 1                SYMBOL hello       hello</span>
-<span class="co"># 3                  expr                  </span>
-<span class="co"># 2           LEFT_ASSIGN    &lt;-        gets</span>
-<span class="co"># 38                 expr                  </span>
-<span class="co"># 4  SYMBOL_FUNCTION_CALL     c a vector of</span></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">obj</span><span class="op">$</span><span class="va">translation_map</span><span class="op">)</span></span>
+<span><span class="co">#                   token  text         eng</span></span>
+<span><span class="co"># 40                 expr                  </span></span>
+<span><span class="co"># 1                SYMBOL hello       hello</span></span>
+<span><span class="co"># 3                  expr                  </span></span>
+<span><span class="co"># 2           LEFT_ASSIGN    &lt;-        gets</span></span>
+<span><span class="co"># 38                 expr                  </span></span>
+<span><span class="co"># 4  SYMBOL_FUNCTION_CALL     c a vector of</span></span></code></pre></div>
 </div>
-<div id="further-examples" class="section level3">
-<h3 class="hasAnchor">
-<a href="#further-examples" class="anchor"></a>Further examples</h3>
-<p>Here’s an example using the pipe (<code><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></code>) and two types of ‘equals’:</p>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)
-<span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/translate.html">translate</a></span>(
-  <span class="no">mtcars</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">mpg</span> <span class="kw">&gt;</span> <span class="fl">22</span>) <span class="kw">%&gt;%</span> <span class="fu">mutate</span>(<span class="kw">gear4</span> <span class="kw">=</span> <span class="no">gear</span> <span class="kw">==</span> <span class="fl">4</span>),
-  <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-)
-<span class="co"># Original expression: mtcars %&gt;% filter(mpg &gt; 22) %&gt;% mutate(gear4 = gear == 4)</span>
-<span class="co"># English expression: mtcars then filter of open paren mpg is greater than 22 close paren then mutate of open paren gear4 = gear double equals 4 close paren</span></pre></div>
+<div class="section level3">
+<h3 id="further-examples">Further examples<a class="anchor" aria-label="anchor" href="#further-examples"></a>
+</h3>
+<p>Here’s an example using the pipe (<code>%&gt;%</code>) and two types of ‘equals’:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
+<span><span class="fu">r2eng</span><span class="fu">::</span><span class="fu"><a href="reference/translate.html">translate</a></span><span class="op">(</span></span>
+<span>  <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">22</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">mutate</span><span class="op">(</span>gear4 <span class="op">=</span> <span class="va">gear</span> <span class="op">==</span> <span class="fl">4</span><span class="op">)</span>,</span>
+<span>  speak <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># Original expression: mtcars %&gt;% filter(mpg &gt; 22) %&gt;% mutate(gear4 = gear == 4)</span></span>
+<span><span class="co"># English expression: mtcars then filter of open paren mpg is greater than 22 close paren then mutate of open paren gear4 = gear double equals 4 close paren</span></span></code></pre></div>
 <p>This example uses the ‘plus’ constructor from {ggplot2}:</p>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/translate.html">translate</a></span>(
-  <span class="fu">ggplot</span>(<span class="no">diamonds</span>, <span class="fu">aes</span>(<span class="kw">x</span><span class="kw">=</span><span class="no">carat</span>, <span class="kw">y</span><span class="kw">=</span><span class="no">price</span>, <span class="kw">color</span><span class="kw">=</span><span class="no">cut</span>)) + <span class="fu">geom_point</span>() + <span class="fu">geom_smooth</span>(),
-  <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-)
-<span class="co"># Original expression: ggplot(diamonds, aes(x = carat, y = price, color = cut)) + geom_point() + </span>
-<span class="co">#  Original expression:     geom_smooth()</span>
-<span class="co"># English expression: ggplot of open paren diamonds , aes of open paren x = carat , y = price , color = cut close paren close paren plus geom_point of open paren close paren plus geom_smooth of open paren close paren</span></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">r2eng</span><span class="fu">::</span><span class="fu"><a href="reference/translate.html">translate</a></span><span class="op">(</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="va">diamonds</span>, <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">carat</span>, y<span class="op">=</span><span class="va">price</span>, color<span class="op">=</span><span class="va">cut</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_smooth</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  speak <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># Original expression: ggplot(diamonds, aes(x = carat, y = price, color = cut)) + geom_point() + </span></span>
+<span><span class="co">#  Original expression:     geom_smooth()</span></span>
+<span><span class="co"># English expression: ggplot of open paren diamonds , aes of open paren x = carat , y = price , color = cut close paren close paren plus geom_point of open paren close paren plus geom_smooth of open paren close paren</span></span></code></pre></div>
 <p>This example shows what happens when you pass vectors:</p>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/translate.html">translate</a></span>(
-  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>), <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span>)),
-  <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-)
-<span class="co"># Original expression: plot(x = c(1, 2, 3), y = c(5, 6, 7))</span>
-<span class="co"># English expression: plot of open paren x = a vector of open paren 1 , 2 , 3 close paren , y = a vector of open paren 5 , 6 , 7 close paren close paren</span></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">r2eng</span><span class="fu">::</span><span class="fu"><a href="reference/translate.html">translate</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  speak <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># Original expression: plot(x = c(1, 2, 3), y = c(5, 6, 7))</span></span>
+<span><span class="co"># English expression: plot of open paren x = a vector of open paren 1 , 2 , 3 close paren , y = a vector of open paren 5 , 6 , 7 close paren close paren</span></span></code></pre></div>
 </div>
-<div id="passing-a-string" class="section level3">
-<h3 class="hasAnchor">
-<a href="#passing-a-string" class="anchor"></a>Passing a string</h3>
-<p>The <code><a href="reference/translate.html">translate()</a></code> function understands the meaning of <code>=</code> when used for assignment versus specifying arguments, but feeding an expression such as <code>x = c(1, 2, 3)</code> would confuse <code><a href="reference/translate.html">translate()</a></code> that you want to pass an argument <code><a href="https://rdrr.io/r/base/c.html">c(1, 2, 3)</a></code> to the parameter <code>x</code>.</p>
-<p>This is because <code><a href="reference/translate.html">translate()</a></code> uses <a href="http://adv-r.had.co.nz/Computing-on-the-language.html">non-standard evaluation</a>.</p>
+<div class="section level3">
+<h3 id="passing-a-string">Passing a string<a class="anchor" aria-label="anchor" href="#passing-a-string"></a>
+</h3>
+<p>The <code><a href="reference/translate.html">translate()</a></code> function understands the meaning of <code>=</code> when used for assignment versus specifying arguments, but feeding an expression such as <code>x = c(1, 2, 3)</code> would confuse <code><a href="reference/translate.html">translate()</a></code> that you want to pass an argument <code>c(1, 2, 3)</code> to the parameter <code>x</code>.</p>
+<p>This is because <code><a href="reference/translate.html">translate()</a></code> uses <a href="http://adv-r.had.co.nz/Computing-on-the-language.html" class="external-link">non-standard evaluation</a>.</p>
 <p>In such cases, you must use <code><a href="reference/translate.html">translate_string()</a></code> instead:</p>
-<div class="sourceCode" id="cb11"><pre class="r"><span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/translate.html">translate_string</a></span>(<span class="st">"x = c(1, 2, 3)"</span>, <span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="co"># Original expression: x = c(1, 2, 3)</span>
-<span class="co"># English expression: x gets a vector of open paren 1 , 2 , 3 close paren</span></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">r2eng</span><span class="fu">::</span><span class="fu"><a href="reference/translate.html">translate_string</a></span><span class="op">(</span><span class="st">"x = c(1, 2, 3)"</span>, speak <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co"># Original expression: x = c(1, 2, 3)</span></span>
+<span><span class="co"># English expression: x gets a vector of open paren 1 , 2 , 3 close paren</span></span></code></pre></div>
 <p>Another exceptional case for <code><a href="reference/translate.html">translate_string()</a></code> is when piping and expression:</p>
-<div class="sourceCode" id="cb12"><pre class="r"><span class="st">"non_english &lt;- c('ceci n est pas une pipe', 'Ich bin ein Berliner', '我其實唔識講廣東話')"</span> <span class="kw">%&gt;%</span>
-  <span class="kw pkg">r2eng</span><span class="kw ns">::</span><span class="fu"><a href="reference/translate.html">translate_string</a></span>(<span class="kw">speak</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="co"># Original expression: non_english &lt;- c("ceci n est pas une pipe", "Ich bin ein Berliner", </span>
-<span class="co">#  Original expression:     "我其實唔識講廣東話")</span>
-<span class="co"># English expression: non_english gets a vector of open paren string "ceci n est pas une pipe" , string "Ich bin ein Berliner" , string "我其實唔識講廣東話" close paren</span></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="st">"non_english &lt;- c('ceci n est pas une pipe', 'Ich bin ein Berliner', '我其實唔識講廣東話')"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">r2eng</span><span class="fu">::</span><span class="fu"><a href="reference/translate.html">translate_string</a></span><span class="op">(</span>speak <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co"># Original expression: non_english &lt;- c("ceci n est pas une pipe", "Ich bin ein Berliner", </span></span>
+<span><span class="co">#  Original expression:     "我其實唔識講廣東話")</span></span>
+<span><span class="co"># English expression: non_english gets a vector of open paren string "ceci n est pas une pipe" , string "Ich bin ein Berliner" , string "我其實唔識講廣東話" close paren</span></span></code></pre></div>
 </div>
 </div>
-<div id="rstudio-addin" class="section level2">
-<h2 class="hasAnchor">
-<a href="#rstudio-addin" class="anchor"></a>RStudio addin</h2>
-<p>Installing this package also installs an <a href="https://rstudio.github.io/rstudioaddins/">RStudio addin</a>.</p>
+<div class="section level2">
+<h2 id="rstudio-addin">RStudio addin<a class="anchor" aria-label="anchor" href="#rstudio-addin"></a>
+</h2>
+<p>Installing this package also installs an <a href="https://rstudio.github.io/rstudioaddins/" class="external-link">RStudio addin</a>.</p>
 <p>Select an R expression in the editor and then under ‘Addins’, go to ‘Speak R Expression In English’ under ‘R2ENG’. The selected text will be spoken by your computer.</p>
 <p>You could bind this addin to a keyboard shortcut in RStudio by going to ‘Tools’, then ‘Modify Keyboard Shortcuts…’. Perhaps <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>.</p>
 <p>As with the rest of this package, vocalisation is only possible for macOS and with speakers.</p>
 <p>Another Addin function is also available, ‘Print R Expression In English’, which prints a selected R expression and its English translation</p>
 </div>
-<div id="contributions-and-code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contributions-and-code-of-conduct" class="anchor"></a>Contributions and Code of Conduct</h2>
-<p>Contributions are welcome from everyone. Please first <a href="https://github.com/matt-dray/r2eng/issues">add an issue</a> if a relevant one one doesn’t already exist.</p>
-<p>Please note that the {r2eng} project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<div class="section level2">
+<h2 id="contributions-and-code-of-conduct">Contributions and Code of Conduct<a class="anchor" aria-label="anchor" href="#contributions-and-code-of-conduct"></a>
+</h2>
+<p>Contributions are welcome from everyone. Please first <a href="https://github.com/matt-dray/r2eng/issues" class="external-link">add an issue</a> if a relevant one one doesn’t already exist.</p>
+<p>Please note that the {r2eng} project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
 
@@ -203,32 +209,51 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/matt-dray/r2eng/">https://​github.com/​matt-dray/​r2eng/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/matt-dray/r2eng/issues">https://​github.com/​matt-dray/​r2eng/​issues</a>
-</li>
+<li><a href="https://github.com/matt-dray/r2eng/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/matt-dray/r2eng/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing r2eng</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Matt Dray <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Chung-hong Chan <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-6232-7530" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Chung-hong Chan <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-6232-7530" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
+<li><a href="https://github.com/matt-dray/r2eng/actions" class="external-link"><img src="https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/gh/matt-dray/r2eng" class="external-link"><img src="https://codecov.io/gh/matt-dray/r2eng/branch/master/graph/badge.svg" alt="codecov"></a></li>
+<li><a href="https://mybinder.org/v2/gh/matt-dray/try-r2eng/master?urlpath=rstudio" class="external-link"><img src="http://mybinder.org/badge_logo.svg" alt="Launch Rstudio Binder"></a></li>
+<li><a href="https://www.rostrum.blog/2020/11/14/hello-r2eng/" class="external-link"><img src="https://img.shields.io/badge/rostrum.blog-post-008900?style=flat&amp;labelColor=black&amp;logo=data:image/gif;base64,R0lGODlhEAAQAPEAAAAAABWCBAAAAAAAACH5BAlkAAIAIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAAQAAAC55QkISIiEoQQQgghRBBCiCAIgiAIgiAIQiAIgSAIgiAIQiAIgRAEQiAQBAQCgUAQEAQEgYAgIAgIBAKBQBAQCAKBQEAgCAgEAoFAIAgEBAKBIBAQCAQCgUAgEAgCgUBAICAgICAgIBAgEBAgEBAgEBAgECAgICAgECAQIBAQIBAgECAgICAgICAgECAQECAQICAgICAgICAgEBAgEBAgEBAgICAgICAgECAQIBAQIBAgECAgICAgIBAgECAQECAQIBAgICAgIBAgIBAgEBAgECAgECAgICAgICAgECAgECAgQIAAAQIKAAAh+QQJZAACACwAAAAAEAAQAAAC55QkIiESIoQQQgghhAhCBCEIgiAIgiAIQiAIgSAIgiAIQiAIgRAEQiAQBAQCgUAQEAQEgYAgIAgIBAKBQBAQCAKBQEAgCAgEAoFAIAgEBAKBIBAQCAQCgUAgEAgCgUBAICAgICAgIBAgEBAgEBAgEBAgECAgICAgECAQIBAQIBAgECAgICAgICAgECAQECAQICAgICAgICAgEBAgEBAgEBAgICAgICAgECAQIBAQIBAgECAgICAgIBAgECAQECAQIBAgICAgIBAgIBAgEBAgECAgECAgICAgICAgECAgECAgQIAAAQIKAAA7" alt="rostrum.blog post"></a></li>
 </ul>
 </div>
 
@@ -237,11 +262,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Matt Dray, Chung-hong Chan.</p>
+  <p></p>
+<p>Developed by Matt Dray, Chung-hong Chan.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>
@@ -249,6 +276,8 @@
 
   
 
+
+  
 
   </body>
 </html>
