@@ -27,7 +27,7 @@ Make R speakable!
 The goal of {r2eng} (as in ‘R to English’) is to take an R expression
 and ‘translate’ it to an English sentence.
 
-The package is intended to:
+The package is intended (optimistically) to:
 
 - improve communication between teachers and learners
 - make R discussions in English more accessible to non-English speakers
@@ -55,7 +55,7 @@ You can install the development version of {r2eng} from GitHub with:
 remotes::install_github("matt-dray/r2eng")
 ```
 
-This package depends on {purrr} and {rlang}.
+This package depends on {rlang}.
 
 ## Examples
 
@@ -65,7 +65,7 @@ target="_blank">non-standard evaluation</a>, so you pass it a bare R
 expression like this:
 
 ``` r
-r2eng::translate(variable <- 1, speak = TRUE)
+r2eng::translate(variable <- 1, speak = FALSE)
 # Original expression: variable <- 1
 # English expression: variable gets 1
 ```

@@ -20,9 +20,9 @@ knitr::opts_chunk$set(
 ɑː ˈtuː /eng/
 
 <!-- badges: start -->
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg){target='_blank'}](https://www.repostatus.org/#wip)
-[![R build status](https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg){target='_blank'}](https://github.com/matt-dray/r2eng/actions)
-[![codecov](https://codecov.io/gh/matt-dray/r2eng/branch/master/graph/badge.svg){target='_blank'}](https://codecov.io/gh/matt-dray/r2eng)
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![R build status](https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg)](https://github.com/matt-dray/r2eng/actions)
+[![codecov](https://codecov.io/gh/matt-dray/r2eng/branch/master/graph/badge.svg)](https://codecov.io/gh/matt-dray/r2eng)
 [![Launch Rstudio Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/matt-dray/try-r2eng/master?urlpath=rstudio)
 <!-- badges: end -->
 
@@ -30,16 +30,16 @@ Make R speakable!
 
 The goal of {r2eng} (as in 'R to English') is to take an R expression and 'translate' it to an English sentence. 
 
-The package is intended to:
+The package is intended (optimistically) to:
 
 * improve communication between teachers and learners
 * make R discussions in English more accessible to non-English speakers
 * provide an extra audio evaluation tool for users who are blind or have low vision
 * be of interest to any R user that's curious about how R expressions might be vocalised
 
-The project was inspired by [Amelia McNamara](https://twitter.com/AmeliaMN){target='_blank'}'s useR! 2020 talk called 'Speaking R' ([YouTube](https://www.youtube.com/watch?v=ckW9sSdIVAc){target='_blank'}, [slides](https://www.amelia.mn/SpeakingR/#1){target='_blank'}).
+The project was inspired by [Amelia McNamara](https://twitter.com/AmeliaMN)'s useR! 2020 talk called 'Speaking R' ([YouTube](https://www.youtube.com/watch?v=ckW9sSdIVAc), [slides](https://www.amelia.mn/SpeakingR/#1)).
 
-This project is a work in progress and highly opinionated. Contributions are welcome, but please see the [Code of Conduct](#conduct){target='_blank'}.
+This project is a work in progress and highly opinionated. Contributions are welcome, but please see the [Code of Conduct](#conduct).
 
 ## Installation
 
@@ -49,14 +49,14 @@ You can install the development version of {r2eng} from GitHub with:
 remotes::install_github("matt-dray/r2eng")
 ```
 
-This package depends on {purrr} and {rlang}.
+This package depends on {rlang}.
 
 ## Examples
 
-The main function in the package is `translate()`. It uses [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html){target='_blank'}, so you pass it a bare R expression like this:
+The main function in the package is `translate()`. It uses [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html), so you pass it a bare R expression like this:
 
 ```{r example-basic}
-r2eng::translate(variable <- 1, speak = TRUE)
+r2eng::translate(variable <- 1, speak = FALSE)
 ```
 
 Set `speak = TRUE` for a system call that will read the English sentence out loud (macOS only).
@@ -135,7 +135,7 @@ r2eng::translate(
 
 The `translate()` function understands the meaning of `=` when used for assignment versus specifying arguments, but feeding an expression such as `x = c(1, 2, 3)` would confuse `translate()` that you want to pass an argument `c(1, 2, 3)` to the parameter `x`. 
 
-This is because `translate()` uses [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html){target='_blank'}. 
+This is because `translate()` uses [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html). 
 
 In such cases, you must use `translate_string()` instead:
 
@@ -152,7 +152,7 @@ Another exceptional case for `translate_string()` is when piping and expression:
 
 ## RStudio addin
 
-Installing this package also installs an [RStudio addin](https://rstudio.github.io/rstudioaddins/){target='_blank'}.
+Installing this package also installs an [RStudio addin](https://rstudio.github.io/rstudioaddins/).
 
 Select an R expression in the editor and then under 'Addins', go to 'Speak R Expression In English' under 'R2ENG'. The selected text will be spoken by your computer. 
 
@@ -164,6 +164,6 @@ Another Addin function is also available, 'Print R Expression In English', which
 
 ## Contributions and Code of Conduct {#conduct}
 
-Contributions are welcome from everyone. Please first [add an issue](https://github.com/matt-dray/r2eng/issues){target='_blank'} if a relevant one one doesn't already exist.
+Contributions are welcome from everyone. Please first [add an issue](https://github.com/matt-dray/r2eng/issues) if a relevant one one doesn't already exist.
 
-Please note that the {r2eng} project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html){target='_blank'}. By contributing to this project, you agree to abide by its terms.
+Please note that the {r2eng} project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

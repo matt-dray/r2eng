@@ -1,6 +1,6 @@
 # r2eng 0.0.0.9006
 
-* Removed {lintr} dependency.
+* Removed {lintr} and {purrr} dependenies.
 
 # r2eng 0.0.0.9005
 
