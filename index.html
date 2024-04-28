@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">r2eng</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9005</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9006</span>
       </span>
     </div>
 
@@ -82,20 +82,20 @@
 <li>provide an extra audio evaluation tool for users who are blind or have low vision</li>
 <li>be of interest to any R user that’s curious about how R expressions might be vocalised</li>
 </ul>
-<p>The project was inspired by <a href="https://twitter.com/AmeliaMN" class="external-link">Amelia McNamara</a>‘s useR! 2020 talk called ’Speaking R’ (<a href="https://www.youtube.com/watch?v=ckW9sSdIVAc" class="external-link">YouTube</a>, <a href="https://www.amelia.mn/SpeakingR/#1" class="external-link">slides</a>).</p>
-<p>This project is a work in progress and highly opinionated. Contributions are welcome, but please see the <a href="#conduct">Code of Conduct</a>.</p>
+<p>The project was inspired by <a href="https://twitter.com/AmeliaMN" target="_blank" class="external-link">Amelia McNamara</a>‘s useR! 2020 talk called ’Speaking R’ (<a href="https://www.youtube.com/watch?v=ckW9sSdIVAc" target="_blank" class="external-link">YouTube</a>, <a href="https://www.amelia.mn/SpeakingR/#1" target="_blank" class="external-link">slides</a>).</p>
+<p>This project is a work in progress and highly opinionated. Contributions are welcome, but please see the <a href="#conduct" target="_blank">Code of Conduct</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the development version of {r2eng} from GitHub with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"matt-dray/r2eng"</span><span class="op">)</span></span></code></pre></div>
-<p>This package depends on {lintr}, {purrr} and {rlang}.</p>
+<p>This package depends on {purrr} and {rlang}.</p>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<p>The main function in the package is <code><a href="reference/translate.html">translate()</a></code>. It uses <a href="http://adv-r.had.co.nz/Computing-on-the-language.html" class="external-link">non-standard evaluation</a>, so you pass it a bare R expression like this:</p>
+<p>The main function in the package is <code><a href="reference/translate.html">translate()</a></code>. It uses <a href="http://adv-r.had.co.nz/Computing-on-the-language.html" target="_blank" class="external-link">non-standard evaluation</a>, so you pass it a bare R expression like this:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r2eng</span><span class="fu">::</span><span class="fu"><a href="reference/translate.html">translate</a></span><span class="op">(</span><span class="va">variable</span> <span class="op">&lt;-</span> <span class="fl">1</span>, speak <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co"># Original expression: variable &lt;- 1</span></span>
@@ -128,15 +128,15 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">obj</span><span class="op">)</span></span>
 <span><span class="co"># Original expression: hello &lt;- c(TRUE, FALSE, "banana" %in% c("apple", "orange"))</span></span>
 <span><span class="co"># English expression: hello gets a vector of open paren TRUE , FALSE , string "banana" matches a vector of open paren string "apple" , string "orange" close paren close paren</span></span></code></pre></div>
-<p>From your r2eng object you can access the original R expression (<code>r_expression</code>), English translation (<code>eng_expression</code>), quoted expression (<code>quoted_expression</code>). You can also access the parse tree output via {lintr} (<code>translation_map</code>):</p>
+<p>From your r2eng object you can access the original R expression (<code>r_expression</code>), English translation (<code>eng_expression</code>), quoted expression (<code>quoted_expression</code>). You can also access the parse tree output (<code>translation_map</code>):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">obj</span><span class="op">$</span><span class="va">translation_map</span><span class="op">)</span></span>
 <span><span class="co">#                   token  text         eng</span></span>
-<span><span class="co"># 40                 expr                  </span></span>
+<span><span class="co"># 45                 expr                  </span></span>
 <span><span class="co"># 1                SYMBOL hello       hello</span></span>
 <span><span class="co"># 3                  expr                  </span></span>
 <span><span class="co"># 2           LEFT_ASSIGN    &lt;-        gets</span></span>
-<span><span class="co"># 38                 expr                  </span></span>
+<span><span class="co"># 43                 expr                  </span></span>
 <span><span class="co"># 4  SYMBOL_FUNCTION_CALL     c a vector of</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -173,7 +173,7 @@
 <h3 id="passing-a-string">Passing a string<a class="anchor" aria-label="anchor" href="#passing-a-string"></a>
 </h3>
 <p>The <code><a href="reference/translate.html">translate()</a></code> function understands the meaning of <code>=</code> when used for assignment versus specifying arguments, but feeding an expression such as <code>x = c(1, 2, 3)</code> would confuse <code><a href="reference/translate.html">translate()</a></code> that you want to pass an argument <code>c(1, 2, 3)</code> to the parameter <code>x</code>.</p>
-<p>This is because <code><a href="reference/translate.html">translate()</a></code> uses <a href="http://adv-r.had.co.nz/Computing-on-the-language.html" class="external-link">non-standard evaluation</a>.</p>
+<p>This is because <code><a href="reference/translate.html">translate()</a></code> uses <a href="http://adv-r.had.co.nz/Computing-on-the-language.html" target="_blank" class="external-link">non-standard evaluation</a>.</p>
 <p>In such cases, you must use <code><a href="reference/translate.html">translate_string()</a></code> instead:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r2eng</span><span class="fu">::</span><span class="fu"><a href="reference/translate.html">translate_string</a></span><span class="op">(</span><span class="st">"x = c(1, 2, 3)"</span>, speak <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -191,7 +191,7 @@
 <div class="section level2">
 <h2 id="rstudio-addin">RStudio addin<a class="anchor" aria-label="anchor" href="#rstudio-addin"></a>
 </h2>
-<p>Installing this package also installs an <a href="https://rstudio.github.io/rstudioaddins/" class="external-link">RStudio addin</a>.</p>
+<p>Installing this package also installs an <a href="https://rstudio.github.io/rstudioaddins/" target="_blank" class="external-link">RStudio addin</a>.</p>
 <p>Select an R expression in the editor and then under ‘Addins’, go to ‘Speak R Expression In English’ under ‘R2ENG’. The selected text will be spoken by your computer.</p>
 <p>You could bind this addin to a keyboard shortcut in RStudio by going to ‘Tools’, then ‘Modify Keyboard Shortcuts…’. Perhaps <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>.</p>
 <p>As with the rest of this package, vocalisation is only possible for macOS and with speakers.</p>
@@ -200,8 +200,8 @@
 <div class="section level2">
 <h2 id="contributions-and-code-of-conduct">Contributions and Code of Conduct<a class="anchor" aria-label="anchor" href="#contributions-and-code-of-conduct"></a>
 </h2>
-<p>Contributions are welcome from everyone. Please first <a href="https://github.com/matt-dray/r2eng/issues" class="external-link">add an issue</a> if a relevant one one doesn’t already exist.</p>
-<p>Please note that the {r2eng} project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Contributions are welcome from everyone. Please first <a href="https://github.com/matt-dray/r2eng/issues" target="_blank" class="external-link">add an issue</a> if a relevant one one doesn’t already exist.</p>
+<p>Please note that the {r2eng} project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" target="_blank" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
 
@@ -249,11 +249,10 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
-<li><a href="https://github.com/matt-dray/r2eng/actions" class="external-link"><img src="https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/matt-dray/r2eng" class="external-link"><img src="https://codecov.io/gh/matt-dray/r2eng/branch/master/graph/badge.svg" alt="codecov"></a></li>
+<li><a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" target="_blank" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
+<li><a href="https://github.com/matt-dray/r2eng/actions" class="external-link"><img src="https://github.com/matt-dray/r2eng/workflows/R-CMD-check/badge.svg" target="_blank" alt="R build status"></a></li>
+<li><a href="https://codecov.io/gh/matt-dray/r2eng" class="external-link"><img src="https://codecov.io/gh/matt-dray/r2eng/branch/master/graph/badge.svg" target="_blank" alt="codecov"></a></li>
 <li><a href="https://mybinder.org/v2/gh/matt-dray/try-r2eng/master?urlpath=rstudio" class="external-link"><img src="http://mybinder.org/badge_logo.svg" alt="Launch Rstudio Binder"></a></li>
-<li><a href="https://www.rostrum.blog/2020/11/14/hello-r2eng/" class="external-link"><img src="https://img.shields.io/badge/rostrum.blog-post-008900?style=flat&amp;labelColor=black&amp;logo=data:image/gif;base64,R0lGODlhEAAQAPEAAAAAABWCBAAAAAAAACH5BAlkAAIAIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAAQAAAC55QkISIiEoQQQgghRBBCiCAIgiAIgiAIQiAIgSAIgiAIQiAIgRAEQiAQBAQCgUAQEAQEgYAgIAgIBAKBQBAQCAKBQEAgCAgEAoFAIAgEBAKBIBAQCAQCgUAgEAgCgUBAICAgICAgIBAgEBAgEBAgEBAgECAgICAgECAQIBAQIBAgECAgICAgICAgECAQECAQICAgICAgICAgEBAgEBAgEBAgICAgICAgECAQIBAQIBAgECAgICAgIBAgECAQECAQIBAgICAgIBAgIBAgEBAgECAgECAgICAgICAgECAgECAgQIAAAQIKAAAh+QQJZAACACwAAAAAEAAQAAAC55QkIiESIoQQQgghhAhCBCEIgiAIgiAIQiAIgSAIgiAIQiAIgRAEQiAQBAQCgUAQEAQEgYAgIAgIBAKBQBAQCAKBQEAgCAgEAoFAIAgEBAKBIBAQCAQCgUAgEAgCgUBAICAgICAgIBAgEBAgEBAgEBAgECAgICAgECAQIBAQIBAgECAgICAgICAgECAQECAQICAgICAgICAgEBAgEBAgEBAgICAgICAgECAQIBAQIBAgECAgICAgIBAgECAQECAQIBAgICAgIBAgIBAgEBAgECAgECAgICAgICAgECAgECAgQIAAAQIKAAA7" alt="rostrum.blog post"></a></li>
 </ul>
 </div>
 
