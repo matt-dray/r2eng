@@ -49,7 +49,7 @@ You can install the development version of {r2eng} from GitHub with:
 remotes::install_github("matt-dray/r2eng")
 ```
 
-This package depends on {lintr}, {purrr} and {rlang}.
+This package depends on {purrr} and {rlang}.
 
 ## Examples
 
@@ -95,7 +95,7 @@ Use `print` to print the R expression and English sentence.
 print(obj)
 ```
 
-From your r2eng object you can access the original R expression (`r_expression`), English translation (`eng_expression`), quoted expression (`quoted_expression`). You can also access the parse tree output via {lintr} (`translation_map`):
+From your r2eng object you can access the original R expression (`r_expression`), English translation (`eng_expression`), quoted expression (`quoted_expression`). You can also access the parse tree output (`translation_map`):
 
 ```{r example-map}
 head(obj$translation_map)

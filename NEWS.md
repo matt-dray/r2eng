@@ -1,3 +1,7 @@
+# r2eng 0.0.0.9006
+
+* Removed {lintr} dependency.
+
 # r2eng 0.0.0.9005
 
 * BREAKING:
