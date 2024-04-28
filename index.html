@@ -75,7 +75,7 @@
 
 <p>Make R speakable!</p>
 <p>The goal of {r2eng} (as in ‘R to English’) is to take an R expression and ‘translate’ it to an English sentence.</p>
-<p>The package is intended to:</p>
+<p>The package is intended (optimistically) to:</p>
 <ul>
 <li>improve communication between teachers and learners</li>
 <li>make R discussions in English more accessible to non-English speakers</li>
@@ -90,14 +90,14 @@
 <p>You can install the development version of {r2eng} from GitHub with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"matt-dray/r2eng"</span><span class="op">)</span></span></code></pre></div>
-<p>This package depends on {purrr} and {rlang}.</p>
+<p>This package depends on {rlang}.</p>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <p>The main function in the package is <code><a href="reference/translate.html">translate()</a></code>. It uses <a href="http://adv-r.had.co.nz/Computing-on-the-language.html" target="_blank" class="external-link">non-standard evaluation</a>, so you pass it a bare R expression like this:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">r2eng</span><span class="fu">::</span><span class="fu"><a href="reference/translate.html">translate</a></span><span class="op">(</span><span class="va">variable</span> <span class="op">&lt;-</span> <span class="fl">1</span>, speak <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">r2eng</span><span class="fu">::</span><span class="fu"><a href="reference/translate.html">translate</a></span><span class="op">(</span><span class="va">variable</span> <span class="op">&lt;-</span> <span class="fl">1</span>, speak <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co"># Original expression: variable &lt;- 1</span></span>
 <span><span class="co"># English expression: variable gets 1</span></span></code></pre></div>
 <p>Set <code>speak = TRUE</code> for a system call that will read the English sentence out loud (macOS only).</p>
