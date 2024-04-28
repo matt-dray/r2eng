@@ -18,7 +18,6 @@ Language: en-GB
 Depends: 
     R (>= 2.10)
 Imports:
-    purrr (>= 0.3.4),
     rlang (>= 0.4.7),
     utils
 Suggests: 

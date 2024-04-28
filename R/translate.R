@@ -1,15 +1,19 @@
 #' @rdname translate
 #' @export
 translate_string <- function(
-  expression, speak = TRUE, function_call_end = "of "
+    expression,
+    speak = TRUE,
+    function_call_end = "of "
 ) {
 
   if (!is.character(expression) & length(expression != 1)) {
     stop("The 'expression' argument must be a character string.\n")
   }
+
   if (!is.logical(speak)) {
     stop("The 'speak' argument must be TRUE or FALSE.\n")
   }
+
   if (!is.character(function_call_end) & length(function_call_end != 1)) {
     stop("The 'function_call_end' argument must be a character string.\n")
   }
@@ -42,30 +46,43 @@ translate_string <- function(
 #' translate(variable <- 1)
 #' }
 translate <- function(expression, speak = TRUE, function_call_end = "of ") {
+
   quoted_expression <- substitute(expression)
+
   if (!is.logical(speak)) {
     stop("The 'speak' argument must be TRUE or FALSE.\n")
   }
+
   if (!is.character(function_call_end) & length(function_call_end != 1)) {
     stop("The 'function_call_end' argument must be a character string.\n")
   }
-  return(.convert_quoted_expression(
-    quoted_expression, speak = speak, function_call_end = function_call_end)
+
+  .convert_quoted_expression(
+    quoted_expression,
+    speak = speak,
+    function_call_end = function_call_end
   )
+
 }
 
 .convert_quoted_expression <- function(
-  quoted_expression, speak = TRUE, function_call_end = "of "
+    quoted_expression,
+    speak = TRUE,
+    function_call_end = "of "
 ) {
 
   trees <- .convert_expr_tree(deparse(quoted_expression))
+  trees_nrow <- nrow(trees)
 
-  eng_vec <- purrr::map2_chr(
-    trees$token,
-    trees$text,
-    .translate,
-    function_call_end = function_call_end
-  )
+  eng_vec <- vector("character", length = trees_nrow)
+
+  for (i in seq_len(trees_nrow)) {
+    eng_vec[[i]] <- .translate(
+      token = trees[i, "token"],
+      text = trees[i, "text"],
+      function_call_end = function_call_end
+    )
+  }
 
   eng_expression <- gsub(" +", " ", paste0(eng_vec, collapse = " "))
 
@@ -82,7 +99,7 @@ translate <- function(expression, speak = TRUE, function_call_end = "of ") {
   class(results) <- append(class(results), "r2eng")
 
   if (speak) {
-      speak(results)
+    speak(results)
   }
 
   return(results)
@@ -98,7 +115,7 @@ translate <- function(expression, speak = TRUE, function_call_end = "of ") {
 #' @return Nothing.
 #' @export
 speak <- function(r2eng, ...) {
-    UseMethod("speak", r2eng)
+  UseMethod("speak", r2eng)
 }
 
 #' Evaluate expression in r2eng object
@@ -111,13 +128,13 @@ speak <- function(r2eng, ...) {
 #' @return Nothing.
 #' @export
 evaluate <- function(r2eng, ...) {
-    UseMethod("evaluate", r2eng)
+  UseMethod("evaluate", r2eng)
 }
 
 #' @rdname evaluate
 #' @export
 evaluate.r2eng <- function(r2eng, envir = parent.frame(), ...) {
-    eval(r2eng$quoted_expression, envir = envir)
+  eval(r2eng$quoted_expression, envir = envir)
 }
 
 #' @rdname speak
@@ -140,8 +157,8 @@ speak.r2eng <- function(r2eng, ...) {
 #' @return Nothing.
 #' @export
 print.r2eng <- function(x, ...) {
-    cat(paste0("Original expression: ", x$r_expression, "\n"))
-    cat(paste0("English expression:", x$eng_expression, "\n"))
+  cat(paste0("Original expression: ", x$r_expression, "\n"))
+  cat(paste0("English expression:", x$eng_expression, "\n"))
 }
 
 .convert_expr_tree <- function(expression) {
