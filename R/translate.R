@@ -243,6 +243,17 @@ print.r2eng <- function(x, ...) {
     return("close square bracket")
   }
 
+  # Pipes
+  if (token == "'|>'") {
+  return("then")
+  }
+  if (token == "'=>'") {
+    return("pipebind to")
+  }
+  if (token == "'_'") {
+    return("underscore placeholder")
+  }
+
   # Assignment
   if (token == "LEFT_ASSIGN" | token == "EQ_ASSIGN") {
     return("gets")
